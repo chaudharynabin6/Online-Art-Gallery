@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -27,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("home/", home_view, name="home"),
     path("signup/", v.register, name="signup"),
+    # for login feature
+    path('', include("django.contrib.auth.urls")),
 ]
 
 # this make the static file to load when were they are requested from url
