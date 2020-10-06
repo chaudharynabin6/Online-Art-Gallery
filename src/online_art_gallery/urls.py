@@ -18,12 +18,14 @@ from django.urls import path
 
 from django.conf import settings
 from django.conf.urls.static import static
+from .view import home_view
 
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("home/", home_view, name="home")
 ]
 
 # this make the static file to load when were they are requested from url
