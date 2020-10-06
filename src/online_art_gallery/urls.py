@@ -19,13 +19,14 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from .view import home_view
-
+from authentication import views as v
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("home/", home_view, name="home")
+    path("home/", home_view, name="home"),
+    path("signup/", v.register, name="register"),
 ]
 
 # this make the static file to load when were they are requested from url
