@@ -26,9 +26,11 @@ from authentication import views as v
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("home/", home_view, name="home"),
+    #for signup feature
     path("signup/", v.register, name="signup"),
     # for login feature
     path('', include("django.contrib.auth.urls")),
+
 ]
 
 # this make the static file to load when were they are requested from url
