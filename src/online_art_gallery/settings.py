@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #adding authentication app
     'authentication.apps.AuthenticationConfig',
+    # adding client app
+    "client",
 ]
 
 MIDDLEWARE = [
