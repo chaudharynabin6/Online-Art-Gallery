@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     # adding client app
     "client",
+    #adding artGallery app
+    "artGallery"
 ]
 
 MIDDLEWARE = [
