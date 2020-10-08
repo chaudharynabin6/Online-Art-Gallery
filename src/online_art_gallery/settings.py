@@ -37,11 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #adding authentication app
+    # adding authentication app
     'authentication.apps.AuthenticationConfig',
     # adding client app
     "client",
-    #adding artGallery app
+    # adding artGallery app
     "artGallery"
 ]
 
@@ -62,9 +62,9 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # we will need to be added to inform the Django also look  /src/templates path
         # for templates
-        #? https://docs.djangoproject.com/en/3.1/howto/overriding-templates/
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
-        
+        # ? https://docs.djangoproject.com/en/3.1/howto/overriding-templates/
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,15 +129,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#? https://docs.google.com/document/d/1Am0LCGmGe0tAZ_KmbBwi86w860CFcZ0ypxaExCuxln8/edit?usp=sharing
+# ? https://docs.google.com/document/d/1Am0LCGmGe0tAZ_KmbBwi86w860CFcZ0ypxaExCuxln8/edit?usp=sharing
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_project')
 ]
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
+STATIC_ROOT = os.path.join(os.path.dirname(
+    BASE_DIR), "static_cdn", "static_root")
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
+MEDIA_ROOT = os.path.join(os.path.dirname(
+    BASE_DIR), "static_cdn", "media_root")
 
 # for after login and logout
 LOGIN_REDIRECT_URL = "/home"
