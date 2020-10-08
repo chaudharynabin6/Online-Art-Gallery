@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     # adding artGallery app
     "artGallery",
     # adding cart app
-    "cart",
+    "cart.apps.CartConfig",
 
 ]
 
