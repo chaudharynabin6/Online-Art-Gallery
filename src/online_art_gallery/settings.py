@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     # adding client app
     "client",
     # adding artGallery app
-    "artGallery"
+    "artGallery",
+    # adding cart app
+    "cart",
+
 ]
 
 MIDDLEWARE = [
