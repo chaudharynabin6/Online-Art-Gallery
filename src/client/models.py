@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from artGallery.models import art
+from cart.models import cart
 
 # Create your models here.
 
@@ -14,6 +15,8 @@ class client(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True, blank=True)
     is_client = models.BooleanField(choices=[(True, "yes"), ], default=True)
+    mycart = models.ManyToManyField(
+        cart, blank=True, null=True)
 
     def __str__(self):
         return f"{self.user.username}-{self.date_created.strftime('%d-%m-%Y')}"
