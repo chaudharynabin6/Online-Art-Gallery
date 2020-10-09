@@ -16,7 +16,7 @@ class client(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     is_client = models.BooleanField(choices=[(True, "yes"), ], default=True)
     mycart = models.ManyToManyField(
-        cart, blank=True, null=True)
+        cart, blank=True)
 
     def __str__(self):
         return f"{self.user.username}-{self.date_created.strftime('%d-%m-%Y')}"
