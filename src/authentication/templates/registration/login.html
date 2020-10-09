@@ -1,23 +1,34 @@
+
+{% extends 'base.html' %}
+{% block title %}
+Login Here 
+{% endblock %}
 {% comment %}
 This login template is automatically
 called when the user visits the login page. or /login url
 {% endcomment %}
-# login.html {% extends "base.html" %} {% block title %}
-Login Here {% endblock %}
 
- {% comment %} {% load crispy_forms_tags %}  {% endcomment %}
 
 {% block content %}
 <form method="post" class="from-group">
   {% csrf_token %}
-  {% comment %}  {{form|crispy}} {% endcomment %}
-  {{form}}
+  {{ form.non_field_errors }}
+  <div class="field">
+    {{ form.email.errors }}
+    <label for="{{ form.email.id_for_label }}">email:</label>
+    {{ form.email }}
+    </div>
+    <div class="field">
+    {{ form.password.errors }}
+    <label for="{{ form.password.id_for_label }}">password:</label>
+    {{ form.password }}
+    </div>
 
   <p>
     Don't have an accoount? Create one
-    <a href="/signup">here</a>
+    <a class="ui button secondary"href="/signup">here</a>
   </p>
-  <button type="submit" class="btn btn-success">
+  <button type="submit" class="ui button primary">
     Login
   </button>
 </form>
