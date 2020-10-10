@@ -19,17 +19,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from .view import home_view
-from authentication import views as v
-
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("home/", home_view, name="home"),
-    #for signup feature
-    path("signup/", v.register, name="signup"),
-    # for login feature
-    path('', include("django.contrib.auth.urls")),
+    # for signup and login feature
+    path("authentication/", include("authentication.urls")),
 
 ]
 

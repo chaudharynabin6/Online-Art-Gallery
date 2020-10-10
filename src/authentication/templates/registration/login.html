@@ -10,26 +10,30 @@ called when the user visits the login page. or /login url
 
 
 {% block content %}
-<form method="post" class="from-group">
+<form method="post" class="ui form">
   {% csrf_token %}
   {{ form.non_field_errors }}
   <div class="field">
-    {{ form.email.errors }}
-    <label for="{{ form.email.id_for_label }}">email:</label>
-    {{ form.email }}
+    {{ form.username.errors }}
+    <label for="{{ form.username.id_for_label }}">User Name:</label>
+    {{ form.username }}
     </div>
     <div class="field">
     {{ form.password.errors }}
-    <label for="{{ form.password.id_for_label }}">password:</label>
+    <label for="{{ form.password.id_for_label }}">Password:</label>
     {{ form.password }}
     </div>
-
-  <p>
-    Don't have an accoount? Create one
-    <a class="ui button secondary"href="/signup">here</a>
-  </p>
-  <button type="submit" class="ui button primary">
+    <div class="field">
+    <button type="submit" class="ui button primary">
     Login
   </button>
+    </div>
+  
+   <div class = "field">
+    Don't have an accoount? Create one
+  </div>
+  <div class ="field">
+  <a class="ui button secondary" href="{% url 'authentication:signup' %}">here</a>
+  </div>
 </form>
 {% endblock %}

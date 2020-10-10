@@ -24,4 +24,4 @@ def register(response):
         # form is created
         form = RegisterForm()
     # finally redering the form in the signup page
-    return render(response, "signup.html", {"form": form})
+    return render(response, "authentication/signup.html", {"form": form})

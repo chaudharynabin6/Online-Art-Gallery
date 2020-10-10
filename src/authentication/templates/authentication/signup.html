@@ -9,27 +9,42 @@
 	
 	{% comment %} {{ form }} {% endcomment %}
 	{{ form.non_field_errors }}
+
 	<div class="field">
     {{ form.username.errors }}
     <label for="{{ form.username.id_for_label }}">Username:</label>
     {{ form.username }}
+    </div>
+
 	<div class="field">
     {{ form.email.errors }}
     <label for="{{ form.email.id_for_label }}">Email:</label>
     {{ form.email }}
+    </div>
+
 	<div class="field">
     {{ form.password1.errors }}
     <label for="{{ form.password1.id_for_label }}">Password:</label>
     {{ form.password1 }}
+    </div>
+
 	<div class="field">
     {{ form.password2.errors }}
     <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
     {{ form.password2 }}
-</div>
-</div>
-</div>
-</div>
+    </div>
+    <div class="field">
+    <button type="submit" class="ui button primary">Register</button>
+    </div>
 
-	<button type="submit" class="ui button primary">Register</button>
+    <div class="field">
+    I have account.
+    </div>
+    <div class="field">
+    <a type="submit" class="ui button secondary" href={% url 'authentication:login'%}>login</a>
+    </div>
+
+	
+    
     </form>
 {% endblock %}
