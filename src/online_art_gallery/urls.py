@@ -25,6 +25,8 @@ urlpatterns = [
     path("home/", home_view, name="home"),
     # for signup and login feature
     path("authentication/", include("authentication.urls")),
+    # for artGallery
+    path("artgallery/", include("artGallery.urls"), name="artGallery")
 
 ]
 

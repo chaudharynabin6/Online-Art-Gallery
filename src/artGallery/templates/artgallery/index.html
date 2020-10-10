@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+artGallery
+{% endblock title %}
+
+{% block content %}
+<div class="ui text container">
+
+{% for art in arts %}
+<div class="ui">
+{{art.art_name}}
+</div>
+<div class="ui">
+{{art.price}}
+</div>
+{% empty %}
+        <h1>no arts</h1>
+{% endfor %}
+</div>
+{% endblock content %}
