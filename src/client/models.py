@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from artGallery.models import art
 from cart.models import cart
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 
@@ -22,7 +23,7 @@ class client(models.Model):
         return f"{self.user.username}-{self.date_created.strftime('%d-%m-%Y')}"
 
     def save(self, *args, **kargs):
-        self.slug = str(self.user.username)
+        self.slug = slugify(str(self.user.username))
         super().save(*args, **kargs)
 
     def get_user_email(self):
@@ -36,7 +37,7 @@ class artist(models.Model):
     bio = models.CharField(max_length=200, default="no bio...")
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(unique=True, blank=True, null=True, editable=False)
+    slug = models.SlugField(unique=True, blank=True, null=True)
     is_artist = models.BooleanField(choices=[(True, "Yes"), ], default=True)
     arts = models.ForeignKey(
         art, on_delete=models.CASCADE, null=True, blank=True)
@@ -45,7 +46,7 @@ class artist(models.Model):
         return f"{self.user.username}-{self.date_created.strftime('%d-%m-%Y')}"
 
     def save(self, *args, **kargs):
-        self.slug = str(self.user.username)
+        self.slug = slugify(str(self.user.username))
         super().save(*args, **kargs)
 
     def get_user_email(self):
