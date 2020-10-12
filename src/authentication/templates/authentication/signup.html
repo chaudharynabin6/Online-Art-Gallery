@@ -22,6 +22,12 @@
     {{ form.email }}
     </div>
 
+    <div class="field">
+    {{ form.client_or_artist.errors }}
+    <label for="{{ form.client_or_artist.id_for_label }}">want to become:</label>
+    {{ form.client_or_artist }}
+    </div>
+
 	<div class="field">
     {{ form.password1.errors }}
     <label for="{{ form.password1.id_for_label }}">Password:</label>
