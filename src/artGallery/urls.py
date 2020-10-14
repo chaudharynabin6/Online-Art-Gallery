@@ -1,6 +1,8 @@
 from django.urls import path
-from . import views
+from .views import home, add_to_cart
 app_name = "artGallery"
 urlpatterns = [
-    path("", views.index, name="index")
+    path("", home, name="home"),
+    path("add-to-cart", add_to_cart, name="add-to-cart")
+
 ]

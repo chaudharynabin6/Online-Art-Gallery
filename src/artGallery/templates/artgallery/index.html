@@ -6,24 +6,33 @@ artGallery
 
 {% block content %}
 {% comment %} <div class="ui text container"> {% endcomment %}
-<div class="ui three column grid">
+<div class="ui one column grid">
 {% for art in arts %}
 
 
         <div class="column">
                 <div class="ui card">
                         <div class="content">
-                        <div class="right floated meta">{{art.date_updated}}</div>
-                        <img class="ui avatar image" src="{{MEDIA_URL}}{{art.photo1}}">
-                       {{art.art_name}}
+                           <div class="right floated meta">{{art.date_updated}}</div>
+                              <img class="ui avatar image" 
+                              src="{{MEDIA_URL}}{{art.artist.profile_photo}}">
+                           {{art.art_name}}
                         </div>
                         <div class="image">
-                        <img src="{{MEDIA_URL}}{{art.photo2}}">
+                        <img src="{{MEDIA_URL}}{{art.photo1}}">
                         </div>
                         <div class="content">
-                        <span class="right floated">
-                        <i class="heart outline like icon"></i>
-                        17 likes
+                         <span class="right floated">
+                        
+                            <form action="{% url 'artGallery:add-to-cart' %}" method="POST" class='like-form' id='{{art.id}}'>
+                            {% csrf_token %}
+                            <input type="hidden" name="art_id" value={{art.id}}>
+                            
+                                <button type="submit" class="ui button like-btn{{art.id}}">
+                                 <i class="cart outline icon"></i> add to cart
+                                </button>
+                                
+                            </form>
                         </span>
                         <i class="archive icon"></i>
                         3 comments
