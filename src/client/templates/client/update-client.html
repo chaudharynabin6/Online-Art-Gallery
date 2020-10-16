@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}
+update&rarr;{{request.user}}
+{% endblock title %}
+
+{% block content %}
+<div class="ui segment">
+    {% if is_updated %}
+        <div class="ui green message">Post added</div>
+    {% endif %}
+     <form action="" method="POST" class='ui form' enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="field">
+        {% if form.profile_photo.errors %}
+        <div class="ui red message">
+            {{ form.profile_photo.errors }}
+        </div>
+        {% endif %}
+        <label class="ui red tag label">choose profile photo:</label>
+        <div class="ui segment ui grid">
+            <div class="five wide column">
+                <div id="choose--photo">
+                {{ form.profile_photo}}
+                </div>  
+            </div>
+            <div class="center aligned six wide column">
+                <div class="ui raised segment">
+                    <a class="ui green ribbon label">current photo </a>
+                    <img class="ui medium centered image"src="{{MEDIA_URL}}{{client.profile_photo}}" alt="no photo" >
+                </div>
+                <label class="ui fluid button primary"for="{{form.profile_photo.id_for_label}}">
+                    <i class="upload icon"></i>
+                    choose image
+                    </label>
+                </div>
+            <div class="five wide column">
+                
+            </div>
+            
+
+        </div>
+        
+    </div>
+    <div class="two fields">
+    
+    <div class="field">
+        {% if form.first_name.errors %}
+        <div class="ui red message">
+            {{ form.first_name.errors }}
+        </div>
+        {% endif %}
+        <label class="ui red tag label" for="{{ form.first_name.id_for_label }}">first name:</label>
+       
+        {{form.first_name}}
+        
+        
+    </div>
+
+    <div class="field">
+        {% if form.last_name.errors %}
+        <div class="ui red message">
+            {{ form.last_name.errors }}
+        </div>
+        {% endif %}
+        <label class="ui red tag label" for="{{ form.last_name.id_for_label }}">last name:</label>
+        
+        {{form.last_name}}
+        
+        
+    </div>
+
+    </div>
+
+    <div class="field">
+        {% if form.bio.errors %}
+        <div class="ui red message">
+            {{ form.bio.errors }}
+        </div>
+        {% endif %}
+        <label class="ui red tag label" for="{{ form.bio.id_for_label }}">bio:</label>
+              
+        {{form.bio}}
+        
+        
+    </div>
+    
+    <div class="ui grid">
+        <div class="center aligned column">
+             <button type='submit'class="ui primary button">Update</button>
+        </div>
+    </div>
+
+    
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+jQuery(document).ready(function(){
+
+    $("#choose--photo").hide()
+})
+</script>
+
+{% endblock scripts %}

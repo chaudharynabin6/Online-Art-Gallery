@@ -9,6 +9,8 @@ from django.template.defaultfilters import slugify
 
 class client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False)
+    first_name = models.CharField(max_length=32, blank=True)
+    last_name = models.CharField(max_length=32, blank=True)
     profile_photo = models.ImageField(
         default="profile.png", upload_to='profile/')
     bio = models.CharField(max_length=200, default="no bio...")
@@ -34,6 +36,8 @@ class artist(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False)
     art_list = models.ManyToManyField(
         art, blank=True, null=True)
+    first_name = models.CharField(max_length=32, blank=True)
+    last_name = models.CharField(max_length=32, blank=True)
     profile_photo = models.ImageField(
         default="profile.png", upload_to='profile/')
     bio = models.CharField(max_length=200, default="no bio...")

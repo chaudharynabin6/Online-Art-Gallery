@@ -26,7 +26,8 @@ urlpatterns = [
     # for signup and login feature
     path("authentication/", include("authentication.urls")),
     # for artGallery
-    path("artgallery/", include("artGallery.urls"), name="artGallery")
+    path("artgallery/", include("artGallery.urls")),
+    path("dashboard/", include(("client.urls")))
 
 ]
 

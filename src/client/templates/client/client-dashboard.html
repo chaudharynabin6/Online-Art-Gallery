@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{request.user}}-dashboard
+{% endblock title %}
+
+{% block content %}
+<div class="ui grid">
+    <div class="row">
+        <div class="ui three wide right floated column">
+             <a class="ui button primary" href="{% url 'client:client-update' %}">
+             <i class="edit outline icon"></i>
+             Update Profile
+             </a>
+        </div>
+    </div>
+</div>
+<div class="ui  grid">
+    <div class="center aligned one column row">
+        <div class="column">
+            <h4 class="ui horizontal divider header">
+                <i class="dashboard icon"></i>
+                {{client.user}}&rarr;Dashboard
+            </h4>
+        </div>    
+    </div>
+    <div class="row">
+        <div class="four wide column">
+            <img class="ui medium centered disabled circular  image" alt="add photo" src="{{MEDIA_URL}}{{client.profile_photo}}">
+        </div>
+        <div class="one wide column">&nbsp;</div>
+        <div class="eleven wide column">
+            <div class="ui segment vertically divided grid">
+                <div class="row">
+                    <div class="left aligned six wide column">
+                    <i class="user icon"></i>
+                    Name:
+                    </div>
+                    <div class="left aligned ten wide column">
+                    {{client.first_name}} {{client.last_name}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left aligned six wide column">
+                    <i class="mail icon"></i>
+                    Email:
+                    </div>
+                    <div class="left aligned ten wide column">
+                    {{request.user.email}}
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="left aligned six wide column">
+                    <i class="calendar outline icon"></i>
+                    Joined on:
+                    </div>
+                    <div class="left aligned ten wide column">
+                    {{client.date_created}}
+                    </div>
+             </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    {% for art in arts %}
+    {{art.art_name}}
+    {% endfor %}
+    </div>
+</div>
+{% endblock content %}

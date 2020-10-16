@@ -5,54 +5,32 @@ artGallery
 {% endblock title %}
 
 {% block content %}
-{% comment %} <div class="ui text container"> {% endcomment %}
-<div class="ui one column grid">
+
+
 {% for art in arts %}
 
-
-        <div class="column">
-                <div class="ui card">
-                        <div class="content">
-                           <div class="right floated meta">{{art.date_updated}}</div>
-                              <img class="ui avatar image" 
-                              src="{{MEDIA_URL}}{{art.artist.profile_photo}}">
-                           {{art.art_name}}
+<div class="ui segment">
+        <div class="ui grid">
+                <div class="row">
+                        <div class="four wide column">
+                        <img class="disabled centered circular ui image" src="{{MEDIA_URL}}{{art.photo1}}">
                         </div>
-                        <div class="image">
-                        <img src="{{MEDIA_URL}}{{art.photo1}}">
+                        <div class="twelve wide column">
+                                <h2 class="ui header">
+                                <i class=" user icon"></i>
+                                {{art.art_name}}
+                                </h2>
                         </div>
-                        <div class="content">
-                         <span class="right floated">
-                        
-                            <form action="{% url 'artGallery:add-to-cart' %}" method="POST" class='like-form' id='{{art.id}}'>
-                            {% csrf_token %}
-                            <input type="hidden" name="art_id" value={{art.id}}>
-                            
-                                <button type="submit" class="ui button like-btn{{art.id}}">
-                                 <i class="cart outline icon"></i> add to cart
-                                </button>
-                                
-                            </form>
-                        </span>
-                        <i class="archive icon"></i>
-                        3 comments
-                        </div>
-                        <div class="extra content">
-                        <div class="ui large transparent left icon input">
-                        <i class="heart outline icon"></i>
-                        <input type="text" placeholder="Add Comment...">
-                        </div>
-                        </div>
-                        </div>
-         </div>    
-                {% empty %}
-                <div class="ui text container">
-                <h1>no arts</h1>
                 </div>
-        
-        
-                
-        {% endfor %}
         </div>
+{% empty %}
+<div class="ui text container">
+<h1>no arts</h1>
+</div>
+        
+        
+{% endfor %}
+</div>
+</div>
 {% comment %} </div> {% endcomment %}
 {% endblock content %}
