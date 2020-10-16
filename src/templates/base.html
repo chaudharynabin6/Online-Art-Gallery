@@ -12,6 +12,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!--Custom css ADD HERE-->
     <link rel="stylesheet" type="text/css" href={% static 'style.css' %}>
+    <style>
+    {% block css %}{% endblock css %}
+    </style>
     <!-- semantic UI -->
     <link
       rel="stylesheet"
@@ -25,10 +28,10 @@
     </title>
   </head>
   <body>
-  {% include "main/navbar.html" %}
-    <div class="ui container">
+  {% comment %} {% include "main/navbar.html" %} {% endcomment %}
+   
       {% block content %} {% endblock content %}
-    </div>
+    
 
     {% block scripts %} {% endblock scripts %}
 
