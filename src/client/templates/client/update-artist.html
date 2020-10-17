@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% block css %}
+
+#form__segment{
+    height:70vh;
+}
+
+{% endblock css %}
+
+{% block title %}
+update&rarr;{{request.user}}
+{% endblock title %}
+
+{% block content %}
+
+
+    <div class="ui container">
+     {% if is_updated %}
+        <div class="ui green message">Post added</div>
+     {% endif %}
+        <div class="ui steps">
+        <div class="step">
+        <button id="basic-detail-step" class="ui fluid button primary"><i class="icon question circle"></i> Basic personal info</button>
+        <h5 class="ui header green">fill up the name and location</h5>
+        </div>
+        <div class="step">
+        <button id="profile-photo-step" class="ui fluid button primary"><i class="icon file image"></i>Profile photo</button>
+         <h5 class="ui header green">upload the new</h5>
+        </div>
+        <div class="step">
+        <button id="bio-step" class="ui fluid button primary "><i class="icon file image"></i>update bio</button>
+        <h5 class="ui header green">your interst</h5>
+        </div>
+     </div>
+    </div>
+    <div  class="ui segment">
+   
+     <form id="form__segment" action="" method="POST" class='ui form' enctype="multipart/form-data">
+     <div class="ui grid container">
+        <div class="right aligned column">
+        <button href="{% url 'client:dashboard' %}" type='submit'class="ui primary button">Update</button>
+        </div>     
+    </div>
+    {% csrf_token %}
+    <div id="profile__photo"class="field">
+        {% if form.profile_photo.errors %}
+        <div class="ui red message">
+            {{ form.profile_photo.errors }}
+        </div>
+        {% endif %}
+        <label class="ui red tag label">choose profile photo:</label>
+        <div class="ui segment ui grid">
+            <div class="five wide column">
+                <div id="choose--photo">
+                {{ form.profile_photo}}
+                </div>  
+            </div>
+            <div class="center aligned six wide column">
+                <div class="ui raised segment">
+                    <a class="ui green ribbon label">current photo </a>
+                    <img class="ui medium centered image"src="{{MEDIA_URL}}{{artist.profile_photo}}" alt="no photo" >
+                </div>
+                <label class="ui fluid button primary"for="{{form.profile_photo.id_for_label}}">
+                    <i class="upload icon"></i>
+                    choose image
+                    </label>
+                </div>
+            <div class="five wide column">
+                
+            </div>
+            
+
+        </div>
+        
+    </div>
+    <div id="name"class="two fields">
+    
+    <div class="field">
+        {% if form.first_name.errors %}
+        <div class="ui red message">
+            {{ form.first_name.errors }}
+        </div>
+        {% endif %}
+        <label class="ui red tag label" for="{{ form.first_name.id_for_label }}">first name:</label>
+       
+        {{form.first_name}}
+        
+        
+    </div>
+
+    <div class="field">
+        {% if form.last_name.errors %}
+        <div class="ui red message">
+            {{ form.last_name.errors }}
+        </div>
+        {% endif %}
+        <label class="ui red tag label" for="{{ form.last_name.id_for_label }}">last name:</label>
+        
+        {{form.last_name}}
+        
+        
+    </div>
+
+    </div>
+
+    <div id="bio" class="field">
+        {% if form.bio.errors %}
+        <div class="ui red message">
+            {{ form.bio.errors }}
+        </div>
+        {% endif %}
+        <label class="ui red tag label" for="{{ form.bio.id_for_label }}">bio:</label>
+              
+        {{form.bio}}
+        
+        
+    </div>
+    
+    
+
+    
+    </form>
+    <div class="ui grid">
+    <button id="previous" class="ui secondary basic button">&larr; previous</button>
+    <button id="next" class="ui secondary basic button">Next &rarr;</button>
+    </div>
+    
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+jQuery(document).ready(function(){
+
+    $("#choose--photo").hide();
+    let $all_buttons = $("#basic-detail-step,#profile-photo-step,#bio-step").removeClass("active");
+    let $all_step = $all_buttons.parent();
+    $all_buttons.children().click(false);
+    let $form_fields= $("#profile__photo,#name,#bio").hide();
+    $("#name").show();
+   
+     $("#basic-detail-step").on("click",(e)=>{
+        $form_fields.slideUp().fadeOut();
+        $("#name").slideDown().fadeIn();
+        $all_buttons.removeClass("active  green").addClass("primary");
+       $e =  $(e.target).removeClass("primary").addClass("active green");
+    });
+     $("#profile-photo-step").on("click",(e)=>{
+        $form_fields.slideUp().fadeOut();
+        $("#profile__photo").slideDown().fadeIn();
+         $all_buttons.removeClass("active  green").addClass("primary");
+        $e = $(e.target).removeClass("primary").addClass("active green");
+        list.setCurrent($e);      
+    });
+     $("#bio-step").on("click",(e)=>{
+        $form_fields.slideUp().fadeOut();
+        $("#bio").slideDown().fadeIn();
+         $all_buttons.removeClass("active  green").addClass("primary");
+        $e = $(e.target).removeClass("primary").addClass("active green"); 
+        list.setCurrent($e);
+        });
+    class circular_linked_list{
+        constructor(list){
+        this.list = list
+        this.N = list.length
+        this.current = 0;
+        }
+        getCurrent(){
+            return this.list[this.current]
+        }
+        setCurrent(current){
+            this.current = this.list.index(current)
+        }
+        getNext(){
+            if(this.current==this.N-1){
+               this.next = 0;
+               this.current = 0;
+            }
+            else{
+                this.next = this.current + 1;
+                this.current = this.current +1;
+
+            }
+            return this.list[this.next];
+           
+        }
+        getPrevious(){
+            if(this.current==0){
+                this.previous = this.N -1;
+                this.current = this.N - 1;
+            }
+            else{
+                this.previous = this.current -1;
+                this.current = this.current - 1;
+            }
+            return this.list[this.previous];
+
+        }
+       
+    }
+
+    list = new circular_linked_list($all_buttons);
+    list.getCurrent().click();
+    $("#next").click((e)=>{
+        list.getNext().click();
+       
+    })
+    $("#previous").click((e)=>{
+      list.getPrevious().click();  
+    })
+    
+    
+
+})
+</script>
+
+{% endblock scripts %}

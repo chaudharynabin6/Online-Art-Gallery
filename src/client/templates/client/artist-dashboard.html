@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block css %}
+#social__container{
+    position:relative;
+}
+#social__icons{
+    position:absolute;
+    bottom:10%;
+}
+{% comment %} #m-small-top{
+    margin-top:2rem;
+} {% endcomment %}
+#profile__img{
+    border-radius:50%;
+}
+{% endblock css %}
+{% block title %}
+{{request.user}}-dashboard
+{% endblock title %}
+
+{% block content %}
+<div class="ui grid">
+    <div class="row">
+        <div class="ui three wide right floated column">
+             <a class="ui button primary" href="{% url 'client:client-update' %}">
+             <i class="edit outline icon"></i>
+             Update Profile
+             </a>
+        </div>
+    </div>
+</div>
+
+<div class="ui grid ">
+    <div class="ui two column row horizontal segments">
+        <div class="ui column segment">
+            <div class="ui  grid ">
+                {% comment %} for left postion of profile {% endcomment %}
+                <div class="ui two column row">
+                {% comment %} for image of profile {% endcomment %}
+                    <div class="column">
+                        <div class="ui grid">
+                        <div class=" column three wide">
+                        &nbsp;
+                        </div>
+                        <div class="ui column ten wide">
+                          <svg width="168" height="168" style="">  
+                            <defs>  
+                            <mask id="text-mask-1" x="0" y="0" width="168" height="168">  
+                                <circle cx="84" cy="84" fill="white" r="84"></circle>
+                            </mask>  
+                            </defs>
+                            <circle cx="84" cy="84" fill="white" r="84" stroke="grey"></circle>
+                            <image x="0" y="0" height="100%" preserveAspectRatio="slice" width="100%" xlink:href="{{MEDIA_URL}}{{artist.profile_photo}}" mask="url(#text-mask-1)"/>  
+                        </svg>
+                        </div>
+                        <div class=" column three wide">
+                        &nbsp;
+                        </div>
+
+                        </div>
+                    </div>
+                    {% comment %} for basic detail  of artist {% endcomment %}
+                    <div class="column ">
+                    <h1 class="ui header blue">{{artist.first_name}} {{artist.last_name}}</h1>
+                    <h4 class="ui header orange"><i class="gift icon"></i>Art lover{{artist.one_word_about_me}}</h4>
+                    <h2 class="ui  header green"><i class="icon flag"></i>Nepal{{artist.country}}</h2>
+                    <h3 class="ui header blue"><a href = "mailto:{{artist.user.email}}"><i class="mail outline icon"></i>{{artist.user.email}}</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% comment %} for right bio and social of profile {% endcomment %}
+        <div id="social__container" class="ui column segment">
+        {% comment %} bio section {% endcomment %}
+            <h1 class="ui centered header pink"><i class="heart icon"></i>My bio</h1>
+            <h5 class="ui header centered"> {{artist.bio}}</h5>
+        <div id="social__icons">
+                    <div class="ui grid">
+                    {% comment %} test {% endcomment %}
+                    {% for account in artist.accounts %}
+                    
+                            <div class="two wide column">
+                            <a href="{{account.link}}">
+                            <i class="{{account.type}} icon"></i>
+                            </a>
+                            </div>
+                            
+                            {% empty %}
+                            <div class="column"> <h5 class="ui header green">NO social media accounts</h5></div>
+                            {% endfor %}
+                    </div>
+        </div>    
+        </div>
+    </div>
+    <div id="m-small-top"class="row">
+    <div class="ui top attached tabular menu">
+        <div class="active item">
+            <button id="my-cart" class="ui button primary active"> 
+                <i class="icon cart"></i>my cart
+            </button>
+        </div>
+        <div class="item">
+         <button id="my-cart" class="ui button basic primary "> 
+                <i class="icon bookmark"></i>following
+         </button>
+        </div>
+
+    </div>
+   
+ 
+    <div class="row">
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+jQuery(document).ready(($)=>{
+
+})
+</script>
+
+{% endblock scripts %}

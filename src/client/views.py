@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
 from .models import client, artist
 from .forms import client_update_form, artist_update_form
 # Create your views here.
@@ -10,11 +10,11 @@ def dashboard(request):
         return render(request, "client/not-found.html")
     else:
         current_client = client.objects.filter(user=request.user).first()
-        if(current_client.mycart):
-            arts = list(current_client.mycart.art_list.all())
-        else:
-            arts = []
         if(current_client):
+            if(current_client.mycart):
+                arts = list(current_client.mycart.art_list.all())
+            else:
+                arts = []
             context = {
                 "client": current_client,
                 "arts":  arts
@@ -28,7 +28,7 @@ def dashboard(request):
             return render(request, "client/artist-dashboard.html", context)
 
 
-def update_client(request):
+def update_client_or_artist(request):
 
     if(not(request.user.is_authenticated)):
         return render(request, "client/not-found.html")
@@ -49,24 +49,13 @@ def update_client(request):
                 form = client_update_form(
                     request.POST, request.FILES, instance=instace_client)
                 if form.is_valid():
-                    c = form.save(commit=False)
-                    # c.user = request.user
-                    c.save()
-                    # client_instance = form.save(commit=False)
-                    # client_instance.user = current_client.user
-                    # client_instance.save(
-                    #     update_fields=['profile_photo', 'bio', ])
+                    valid_client = form.save(commit=False)
+                    valid_client.save()
+
                     print(form.cleaned_data)
-                    # client.update()
-                    # form.save()
-                    # client.objects.filter(
-                    #     user=request.user).(
-                    #     first_name=data["first_name"],
-                    #     last_name=data["last_name"],
-                    #     profile_photo=data["profile_photo"],
-                    #     bio=data["bio"])
 
                     is_client_updated = True
+                    return redirect("client:dashboard")
                 else:
                     return HttpResponse("client not updated")
             context = {
@@ -78,4 +67,34 @@ def update_client(request):
             return render(request, "client/update-client.html", context)
 
         else:
-            return render(request, "client/not-found.html")
+            is_artist_updated = False
+            current_artist = artist.objects.filter(user=request.user).first()
+
+            if(current_artist):
+                form = artist_update_form(initial={
+                    "profile_photo": current_artist.profile_photo,
+                    "first_name": current_artist.first_name,
+                    "last_name": current_artist.last_name,
+                    "bio": current_artist.bio
+                })
+            if(request.method == "POST"):
+                instace_artist = get_object_or_404(artist, user=request.user)
+                form = artist_update_form(
+                    request.POST, request.FILES, instance=instace_artist)
+                if form.is_valid():
+                    valid_artist = form.save(commit=False)
+                    valid_artist.save()
+
+                    print(form.cleaned_data)
+
+                    is_artist_updated = True
+                    return redirect("client:dashboard")
+                else:
+                    return HttpResponse("artist not updated")
+            context = {
+                "form": form,
+                "artist": current_artist,
+                "is_updated": is_artist_updated,
+            }
+
+            return render(request, "client/update-artist.html", context)
