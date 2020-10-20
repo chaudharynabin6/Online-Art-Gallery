@@ -1,13 +1,17 @@
 from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
 from .models import client, artist
 from .forms import client_update_form, artist_update_form
+from artGallery.forms import art_add_or_update
+from artGallery.models import art
 # Create your views here.
 
 
 def dashboard(request):
     user = request.user
     if(not(user.is_authenticated)):
-        return render(request, "client/not-found.html")
+        return render(request, "client/not-found.html", context={
+            "error": "you must login as client or artist first"
+        })
     else:
         current_client = client.objects.filter(user=request.user).first()
         if(current_client):
@@ -21,9 +25,10 @@ def dashboard(request):
             }
             return render(request, "client/client-dashboard.html", context)
         else:
-            current_artist = artist.objects.filter(user=request.user)
+            current_artist = artist.objects.filter(user=request.user).first()
             context = {
-                "artist": current_artist.first()
+                "artist": current_artist,
+                "art_list": current_artist.art_list.all()
             }
             return render(request, "client/artist-dashboard.html", context)
 
@@ -31,7 +36,9 @@ def dashboard(request):
 def update_client_or_artist(request):
 
     if(not(request.user.is_authenticated)):
-        return render(request, "client/not-found.html")
+        return render(request, "client/not-found.html", context={
+            "error": "you must login as client or artist first"
+        })
 
     else:
         is_client_updated = False
@@ -51,9 +58,6 @@ def update_client_or_artist(request):
                 if form.is_valid():
                     valid_client = form.save(commit=False)
                     valid_client.save()
-
-                    print(form.cleaned_data)
-
                     is_client_updated = True
                     return redirect("client:dashboard")
                 else:
@@ -98,3 +102,30 @@ def update_client_or_artist(request):
             }
 
             return render(request, "client/update-artist.html", context)
+
+
+def add_art(request):
+    current_artist = artist.objects.filter(user=request.user).first()
+    if(current_artist):
+        is_new_art_added = False
+        form = art_add_or_update()
+        if(request.method == "POST"):
+            form = art_add_or_update(
+                request.POST, request.FILES)
+            if form.is_valid():
+                new_art = form.save()
+                current_artist.art_list.add(new_art)
+                is_new_art_added = True
+            else:
+                print("invalid form")
+        context = {
+            "current_artist": current_artist,
+            "form": form,
+            "is_new_art_added": is_new_art_added,
+        }
+        return render(request, "client/add-art.html", context)
+    else:
+        context = {
+            "error": "you must login as artist first"
+        }
+        return render(request, "client/not-found.html", context)

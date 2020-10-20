@@ -9,7 +9,7 @@ rating_choise = [(1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")]
 
 class art(models.Model):
     art_name = models.CharField(max_length=200, blank=False)
-    rating = models.IntegerField(choices=rating_choise, default=1)
+    quality = models.IntegerField(choices=rating_choise, default=1)
     price = models.DecimalField(decimal_places=2, max_digits=20, blank=False)
     art_slug = models.SlugField(
         unique=True, null=True, blank=True, editable=False)

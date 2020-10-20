@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{request.user}}-add art
+{% endblock title %}
+
+{% block content %}
+<form action="" method="post">
+{% csrf_token %}
+{{form}}
+<button class="ui button primary" type="submit">add art</button>
+
+
+</form>
+{% endblock content %}

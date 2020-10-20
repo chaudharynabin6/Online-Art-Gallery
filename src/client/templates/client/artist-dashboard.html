@@ -7,9 +7,9 @@
     position:absolute;
     bottom:10%;
 }
-{% comment %} #m-small-top{
+ #m-small-top{
     margin-top:2rem;
-} {% endcomment %}
+} 
 #profile__img{
     border-radius:50%;
 }
@@ -96,15 +96,44 @@
     <div class="ui top attached tabular menu">
         <div class="active item">
             <button id="my-cart" class="ui button primary active"> 
-                <i class="icon cart"></i>my cart
+                <i class="icon theme"></i>my art
             </button>
         </div>
         <div class="item">
          <button id="my-cart" class="ui button basic primary "> 
-                <i class="icon bookmark"></i>following
+                <i class="icon bookmark"></i>follower
          </button>
         </div>
 
+    </div>
+     <div class="ui bottom attached active tab segment">
+     <div id="m-small-top" class="ui grid">
+       <a href="{% url 'client:add-art' %}"class="ui  button basic small pink">
+        <i class="add square icon"></i>
+        New Art
+        </a>
+     </div>
+   
+     
+        <div id="m-small-top" class="ui three column grid">
+        {% for art in art_list %}
+            <div class="column"">
+            {{art}}
+            </div>
+
+            {% empty %}
+            <div class="column">
+            <h5 class="ui header yellow">no arts</h5>
+            </div>
+        
+         {% endfor %}
+    </div>
+    <div class="ui bottom attached  tab segment">
+        {% for client in artist.follower  %}
+        
+        {% empty %}
+
+        {% endfor %}
     </div>
    
  
