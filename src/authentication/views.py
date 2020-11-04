@@ -25,7 +25,7 @@ def register(request):
             else:
                 artist.objects.create(user=user)
             # finally reurning to /home url
-            return redirect("/home")
+            return redirect("authentication:login")
     else:  # if the requset method is not post eg. get then
         # form is created
         form = RegisterForm()

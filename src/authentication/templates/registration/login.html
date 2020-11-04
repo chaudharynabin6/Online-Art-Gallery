@@ -10,6 +10,9 @@ called when the user visits the login page. or /login url
 
 
 {% block content %}
+<div class="ui container">
+
+
 <form method="post" class="ui form">
   {% csrf_token %}
   {{ form.non_field_errors }}
@@ -36,4 +39,5 @@ called when the user visits the login page. or /login url
   <a class="ui button secondary" href="{% url 'authentication:signup' %}">here</a>
   </div>
 </form>
+</div>
 {% endblock %}

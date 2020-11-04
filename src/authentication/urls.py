@@ -6,5 +6,5 @@ urlpatterns = [
     # for signup
     path("signup", views.register, name="signup"),
     # for login feature
-    path('', include("django.contrib.auth.urls"), name="login"),
+    path('', include("django.contrib.auth.urls")),
 ]

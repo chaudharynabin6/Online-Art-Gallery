@@ -22,7 +22,7 @@ from .view import home_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("home/", home_view, name="home"),
+    path("", home_view, name="home"),
     # for signup and login feature
     path("authentication/", include("authentication.urls")),
     # for artGallery

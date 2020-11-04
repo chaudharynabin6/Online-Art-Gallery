@@ -107,11 +107,19 @@
 
     </div>
     <div class="ui bottom attached active tab segment">
-        {% for art in client.mycart %}
+    <div class="ui container">
+    <div class="ui four column grid">
+        
+        {% for art,artist in arts %}
+        <div class="column">{% include "client/card.html" %}</div>
         
         {% empty%}
+        
 
         {% endfor %}
+        </div>
+    </div>
+        
     </div>
     <div class="ui bottom attached  tab segment">
         {% for artist in client.following  %}
@@ -128,9 +136,17 @@
 
 {% block scripts %}
 <script>
-jQuery(document).ready(($)=>{
-
-})
+$(document).ready(function(){
+    $(".rating").rating("disable");
+    
+    $("#grid").css({
+        "margin-left":"0px",
+        "margin-right":"0px",
+        "margin-top":"5px",
+        "margin-bottom":"5px"
+        });
+    $(".ui.label:last-child ").css({"margin-right":"-1rem"});
+});
 </script>
 
 {% endblock scripts %}

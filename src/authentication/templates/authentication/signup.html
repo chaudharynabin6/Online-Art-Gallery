@@ -4,6 +4,8 @@
 
 
 {% block content %}
+<div class="ui container">
+
     <form method="POST" class="ui form">
 	{% csrf_token %}
 	
@@ -53,4 +55,5 @@
 	
     
     </form>
+    </div>
 {% endblock %}

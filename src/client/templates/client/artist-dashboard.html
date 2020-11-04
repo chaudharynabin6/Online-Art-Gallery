@@ -114,11 +114,11 @@
         </a>
      </div>
    
-     
-        <div id="m-small-top" class="ui three column grid">
-        {% for art in art_list %}
+    <div id="m-small-top" class="ui container">
+        <div  class="ui three column grid">
+        {% for art,artist in arts %}
             <div class="column"">
-            {{art}}
+            {% include "client/card.html" %}
             </div>
 
             {% empty %}
@@ -128,6 +128,9 @@
         
          {% endfor %}
     </div>
+ </div>
+</div>
+        
     <div class="ui bottom attached  tab segment">
         {% for client in artist.follower  %}
         
@@ -135,10 +138,10 @@
 
         {% endfor %}
     </div>
-   
+   </div>
+   </div>
  
-    <div class="row">
-    </div>
+    
 
 {% endblock content %}
 

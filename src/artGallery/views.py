@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import art
 from client.models import client, artist
 from cart.models import cart
@@ -9,19 +9,24 @@ from django.http import HttpResponse
 
 def home(request):
     if(not(request.user.is_authenticated)):
+        arts = [(art, art.artist_set.all().first())
+                for art in art.objects.all()]
+        print(arts)
         return render(request, "artgallery/index.html", {
-            "arts": art.objects.all(),
+            "arts": arts,
         })
     else:
         client_user = client.objects.filter(user=request.user)
+        arts = [(art, art.artist_set.all().first())
+                for art in art.objects.all()]
         if(client_user):
             # for client user
             return render(request, "artgallery/index.html", {
-                "arts": art.objects.all(),
+
+                "arts": arts,
             })
         else:
-            # for artist user
-            pass
+            return HttpResponse("you must login as client first or logout first")
 
 
 def add_to_cart(request):
@@ -45,7 +50,7 @@ def add_to_cart(request):
             current_client.mycart = current_user_cart
             current_client.save()
 
-        return HttpResponse("hello")
+        return redirect("artGallery:home")
 
         # if profile in post_obj.liked.all():
         #     post_obj.liked.remove(profile)

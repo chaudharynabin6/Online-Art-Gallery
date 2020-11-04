@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
+
+
+
+
 
 {% block title %}
 artGallery
@@ -6,31 +11,40 @@ artGallery
 
 {% block content %}
 
+ <div class="ui five column grid">
+{% for art,artist in arts %}
 
-{% for art in arts %}
-
-<div class="ui segment">
-        <div class="ui grid">
-                <div class="row">
-                        <div class="four wide column">
-                        <img class="disabled centered circular ui image" src="{{MEDIA_URL}}{{art.photo1}}">
-                        </div>
-                        <div class="twelve wide column">
-                                <h2 class="ui header">
-                                <i class=" user icon"></i>
-                                {{art.art_name}}
-                                </h2>
-                        </div>
-                </div>
-        </div>
-{% empty %}
-<div class="ui text container">
-<h1>no arts</h1>
+<div class="column">
+        {% include "artgallery/card.html" %}
+       
 </div>
+
         
         
 {% endfor %}
 </div>
-</div>
+
 {% comment %} </div> {% endcomment %}
+
+
+
+
+
 {% endblock content %}
+
+{% block scripts %}
+<script>
+$(document).ready(function(){
+    $(".rating").rating("disable");
+    
+    $("#grid").css({
+        "margin-left":"0px",
+        "margin-right":"0px",
+        "margin-top":"5px",
+        "margin-bottom":"5px"
+        });
+    $(".ui.label:last-child ").css({"margin-right":"-1rem"});
+});
+</script>
+
+{% endblock scripts %}
