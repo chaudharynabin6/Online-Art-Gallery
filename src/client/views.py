@@ -16,7 +16,9 @@ def dashboard(request):
         current_client = client.objects.filter(user=request.user).first()
         if(current_client):
             if(current_client.mycart):
-                arts = list(current_client.mycart.art_list.all())
+                # arts = list(current_client.mycart.art_list.all())
+                arts = [(art, art.artist_set.all().first())
+                        for art in current_client.mycart.art_list.all()]
             else:
                 arts = []
             context = {
@@ -26,9 +28,11 @@ def dashboard(request):
             return render(request, "client/client-dashboard.html", context)
         else:
             current_artist = artist.objects.filter(user=request.user).first()
+            arts = [(art, art.artist_set.all().first())
+                    for art in current_artist.art_list.all()]
             context = {
                 "artist": current_artist,
-                "art_list": current_artist.art_list.all()
+                "arts": arts
             }
             return render(request, "client/artist-dashboard.html", context)
 
@@ -116,6 +120,7 @@ def add_art(request):
                 new_art = form.save()
                 current_artist.art_list.add(new_art)
                 is_new_art_added = True
+                return redirect("client:dashboard")
             else:
                 print("invalid form")
         context = {

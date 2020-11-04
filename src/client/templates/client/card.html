@@ -1,0 +1,34 @@
+<div id="c-card" class="ui card">
+    <div id="c-card__pading"class="content">
+    <img src="{{MEDIA_URL}}{{art.photo1}}" alt="" class="ui  image">
+                
+    <div id="c-card__top">
+    <div id="margin-top-5 margin-bottom-5"><h5 class="ui header centered green label fluid">{{art.art_name}}</h5></div>
+    <div class="ui grid middle aligned">
+    <div class="row">
+        <div class="eight wide column">
+        <div class="ui small star rating" data-max-rating="5" data-rating="{{art.quality}}"></div>
+        </div>   
+        <div class="eight wide column">
+
+        </div>
+    </div>
+    
+    </div>
+                
+    
+        <div class="ui grid middle aligned label white">
+                        <div class="eight wide column">
+                        <h5 class="ui header blue">{{artist.first_name}} {{artist.last_name}}</h5>
+                        </div>
+                            
+                        <div class="eight wide column ">
+                                <img class="ui image circular tiny"src="{{MEDIA_URL}}{{artist.profile_photo}}" alt="">
+                        </div>
+
+        </div>
+                
+      </div>
+     </div>
+ </div>
+

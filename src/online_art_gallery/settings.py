@@ -147,5 +147,5 @@ MEDIA_ROOT = os.path.join(os.path.dirname(
     BASE_DIR), "static_cdn", "media_root")
 
 # for after login and logout
-LOGIN_REDIRECT_URL = "/home"
-LOGOUT_REDIRECT_URL = "/home"
+LOGIN_REDIRECT_URL = "/dashboard"
+LOGOUT_REDIRECT_URL = "/artgallery"

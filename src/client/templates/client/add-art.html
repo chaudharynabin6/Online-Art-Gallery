@@ -5,11 +5,21 @@
 {% endblock title %}
 
 {% block content %}
+<div class="ui container">
 <form action="" method="post">
 {% csrf_token %}
-{{form}}
+{{form.as_p}}
 <button class="ui button primary" type="submit">add art</button>
-
-
 </form>
+</div>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+$(document).ready(()=>{
+$("form").addClass(["ui","form"])
+$("form").children().filter("p").addClass("field")
+
+});
+</script>
+{% endblock scripts %}
