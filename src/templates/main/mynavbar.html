@@ -1,0 +1,38 @@
+
+<div id="my-nav" class="ui inverted green top fixed menu">
+
+    
+   <div class="ui text container">
+        <div class="item">
+        <a href="{% url 'artGallery:home' %}">Home</a>
+        </div>
+
+        {% if request.user.is_authenticated %}
+        <div class="item">
+        <a href="{% url 'client:dashboard' %}">My Dashboard</a>
+        </div>
+        <div class="right menu">
+        <div class="item">
+        <a href="{% url 'authentication:logout' %}">Logout</a>
+        </div>
+        </div>
+    
+
+    {% endif %}
+
+    {% if not request.user.is_authenticated%}
+    <div class="right menu">
+    <div class="item">
+    <a href="{% url 'authentication:login' %}">Log In</a>
+    </div>
+    <div class="item">
+    <a href="{% url 'authentication:signup' %}">Sign Up</a>
+    </div>
+    </div>
+    {% endif %}
+
+    </div>
+</div>
+
+
+

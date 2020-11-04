@@ -9,10 +9,14 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    {% comment %} <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> {% endcomment %}
     <!--Custom css ADD HERE-->
+    {% block custom-css %} {% endblock custom-css %}
     <link rel="stylesheet" type="text/css" href={% static 'style.css' %}>
     <style>
+    #my-nav + div {
+      margin-top:5rem;
+    }
     {% block css %}{% endblock css %}
     </style>
     <!-- semantic UI -->
@@ -21,27 +25,32 @@
       type="text/css"
       href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-    {% comment %} jQuery ui cdn {% endcomment %}
-    <script
-      src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-      crossorigin="anonymous">
-    </script>
+   
 
     <title>
       onlineAG - {% block title %}{% endblock title %}
     </title>
   </head>
   <body>
-  {% comment %} {% include "main/navbar.html" %} {% endcomment %}
-   
-      {% block content %} {% endblock content %}
+  {% include "main/mynavbar.html" %}
+  {% block content %} {% endblock content %}
+      
+
+    <!--Custom js ADD HERE-->
+    
+    <script src={% static 'jquery.min.js' %}></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    {% comment %} jQuery ui cdn {% endcomment %}
+    <script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+      crossorigin="anonymous">
+      </script>
+
     
 
     {% block scripts %} {% endblock scripts %}
-
-    <!--Custom js ADD HERE-->
     <script type="text/javascript" src={% static 'main.js' %}></script>
+    </script>
   </body>
 </html>
