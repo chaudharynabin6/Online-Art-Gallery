@@ -6,20 +6,23 @@
 
 {% block content %}
 <div class="ui container">
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
 {% csrf_token %}
-{{form.as_p}}
+{{form}}
 <button class="ui button primary" type="submit">add art</button>
 </form>
 </div>
 {% endblock content %}
 
 {% block scripts %}
+
 <script>
+
 $(document).ready(()=>{
 $("form").addClass(["ui","form"])
 $("form").children().filter("p").addClass("field")
 
 });
 </script>
+
 {% endblock scripts %}

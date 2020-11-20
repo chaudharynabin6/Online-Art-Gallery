@@ -6,10 +6,6 @@
 		{
 			"name": "Social-Network",
 			"path": "..\\Social-Network"
-		},
-		{
-			"name": "Online-Art-Gallery @ f7a1c33",
-			"uri": "gitlens://f7a1c33/c:/Users/duuramain/Projects/Online-Art-Gallery?{\"path\":\"/c:/Users/duuramain/Projects/Online-Art-Gallery\",\"ref\":\"f7a1c336eb7d9ffb9fd76438da59154649ceefd7\",\"repoPath\":\"c:/Users/duuramain/Projects/Online-Art-Gallery\"}"
 		}
 	],
 	"settings": {}
