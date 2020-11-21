@@ -15,6 +15,19 @@
         <h3 class="ui header">
         Rs. {{art.minimum_price}}
         </h3>
+        {% if request.user.is_superuser %}
+        <div class="ui raised segment">
+        
+            <form action="{% url 'exhibition:approve-art' %}" method="POST" class='like-form' id='{{art.id}}'>
+            {% csrf_token %}
+            <input type="hidden" name="art_id" value={{art.id}}>
+            <button type="submit" class="ui button">
+            Appprove
+            </button>
+            </form>
+        
+         </div>
+        {% endif %}
         </div>
         </div>
         <div  class="column">

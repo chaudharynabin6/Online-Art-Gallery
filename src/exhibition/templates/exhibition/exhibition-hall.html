@@ -1,12 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if is_artist %}
 <div class="ui container">
 <a class="ui button primary" href="{% url 'exhibition:add-art' %}">Add Art</a>
+</div>
+<br>
+{% endif %}
+<div class="ui container">
+<div class="ui grid three column">
+{% for art in arts %}
+    <a id="art" class="column" href={% url 'exhibition:art-showcase' art.id %} >
+    <figure>
+    <img style="height:25vh; width:auto;"class="ui image fluid  segment raised"src="{{MEDIA_URL}}{{art.photo}}" alt="" srcset="">
+    <figcaption id="art__name"class="ui small header green center aligned">
+    {{art.name}}
+    </figcaption>
+    </figure>
+    </a>
 
 
-
-
+{% endfor %}
 </div>
 
+</div>
 {% endblock content %}
+
+{% block script %}
+<script>
+$(document).ready(function(){
+
+$("#art").css({
+    positon:"relative",
+});
+$("#art__name").css({
+    position:"absolute",
+});
+
+
+})
+</script>
+{% endblock script %}
