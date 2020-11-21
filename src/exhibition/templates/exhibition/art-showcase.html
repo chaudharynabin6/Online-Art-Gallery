@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="ui container">
+    <div class="ui grid two column">
+        <div class="column green">
+        <video  class="ui raised segment"width="100%" controls loop autoplay>
+            <source src="{{MEDIA_URL}}{{art.video}}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="ui segment raised">
+        <h5 class="ui header">
+        current top bid
+        </h5>
+        <h3 class="ui header">
+        Rs. {{art.minimum_price}}
+        </h3>
+        </div>
+        </div>
+        <div  class="column">
+            <div class="ui grid two column container">
+                <div class="column">
+                    <form class="ui form">
+                    <input type="text" name="" id="">
+                    </form>
+                </div>
+                <div class="column">
+                    <button style="width:50%;" class="ui button primary fluid">
+                    Bid
+                    </button>
+                </div>
+            </div>
+            <div class="ui segment">
+            
+            <h2  class="ui header green center aligned">
+            {{art.name}}
+            </h2>
+            <div class="ui  segment">
+                <h3 class="ui header">Detail</h3>
+                <h5 class="ui header">
+                {{art.description}}
+                </h5>
+            </div>
+            <div class="ui segment">
+            <div class="ui grid two column">
+            <div class="column">
+            <h3 class="ui header">
+            Art by
+            </h3>
+                <div class="ui grid two column">
+                    <div class="column">
+                         <img class="ui image tiny circular" src="{{MEDIA_URL}}{{art.artist.profile_photo}}" alt="loading" srcset="">
+                    </div>
+                    <div class="column">
+                        <h5 class="ui header green">{{art.artist.first_name}} {{art.artist.last_name}}</h5>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

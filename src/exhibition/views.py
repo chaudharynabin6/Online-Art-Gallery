@@ -2,7 +2,7 @@ from django.http import request
 from django.shortcuts import render
 from .forms import add_update_art_form
 from client.models import client, artist
-from .models import exhibtion
+from .models import exhibtion, art, auction
 # Create your views here.
 
 
@@ -10,7 +10,13 @@ def exhibition_hall(request):
     """
     This function is home for the exhibition hall
     """
-    return render(request, "exhibition/exhibition-hall.html")
+    arts = art.objects.all()
+
+    context = {
+        "arts": arts
+    }
+
+    return render(request, "exhibition/exhibition-hall.html", context)
 
 
 def add_art(request):
@@ -31,3 +37,13 @@ def add_art(request):
 
     else:
         return render(request, "exhibition/not-found.html", {"error": "this feature is only available to artist"})
+
+
+def art_showcase(request):
+
+    current_art = art.objects.first()
+
+    context = {
+        "art": current_art
+    }
+    return render(request, "exhibition/art-showcase.html", context)
