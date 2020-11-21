@@ -15,10 +15,13 @@ class exhibtion(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.name}-{self.date_created.strftime('%d-%m-%Y')}"
+
 
 class art(models.Model):
-    exhibtion = models.OneToOneField(exhibtion, on_delete=DO_NOTHING)
-    artist = models.OneToOneField(artist, on_delete=DO_NOTHING)
+    exhibtion = models.ForeignKey(exhibtion, on_delete=DO_NOTHING)
+    artist = models.ForeignKey(artist, on_delete=DO_NOTHING)
     minimum_price = models.DecimalField(max_digits=20, decimal_places=2)
     name = models.CharField(max_length=32, blank=False)
     photo = models.ImageField(default="profile.png",
@@ -28,10 +31,16 @@ class art(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.name}-{self.date_created.strftime('%d-%m-%Y')}"
+
 
 class auction(models.Model):
-    art = models.OneToOneField(art, on_delete=DO_NOTHING)
-    client = models.OneToOneField(client, on_delete=DO_NOTHING)
-    price = models.DecimalField(max_digits=20, decimal_places=2)
+    art = models.ForeignKey(art, on_delete=DO_NOTHING)
+    client = models.ForeignKey(client, on_delete=DO_NOTHING)
+    bid_amount = models.DecimalField(max_digits=20, decimal_places=2)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.client.user.username}-{self.bid_amount}"
