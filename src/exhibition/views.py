@@ -41,7 +41,7 @@ def add_art(request):
             current_art.exhibtion = exhibtion.objects.first()
             current_art.artist = current_artist
             current_art.save()
-            return render(request, "exhibition/exhibition-hall.html")
+            return redirect("exhibition:exhibition-hall")
         context = {
             "form": form
         }
