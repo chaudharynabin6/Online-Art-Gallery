@@ -31,18 +31,22 @@
         </div>
         </div>
         <div  class="column">
-            <div class="ui grid two column container">
+            {% if is_client %}
+            <form class="ui form" action="{% url 'exhibition:auction' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="art_id" value={{art.id}}>
+                <div class="ui grid two column container">
                 <div class="column">
-                    <form class="ui form">
-                    <input type="text" name="" id="">
-                    </form>
+                    <input type="number" name="bid_amount" step="0.01" required="" id="id_minimum_price">
                 </div>
                 <div class="column">
-                    <button style="width:50%;" class="ui button primary fluid">
+                    <button type="submit" style="width:50%;" class="ui button primary fluid">
                     Bid
                     </button>
                 </div>
             </div>
+            </form>
+            {% endif %}
             <div class="ui segment">
             
             <h2  class="ui header green center aligned">
