@@ -61,9 +61,12 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 # excluding the medai_root
-!/static_cdn
-/static_cdn/*
-!/static_cdn/media_root/
+# !/static_cdn
+# /static_cdn/*
+# !/static_cdn/media_root/
+
+# excluding static_cdn
+/static_cdn
 
 # Flask stuff:
 instance/
