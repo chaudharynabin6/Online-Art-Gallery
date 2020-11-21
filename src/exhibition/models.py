@@ -20,8 +20,8 @@ class exhibtion(models.Model):
 
 
 class art(models.Model):
-    exhibtion = models.ForeignKey(exhibtion, on_delete=DO_NOTHING)
-    artist = models.ForeignKey(artist, on_delete=DO_NOTHING)
+    exhibtion = models.ForeignKey(exhibtion, on_delete=models.CASCADE)
+    artist = models.ForeignKey(artist, on_delete=models.CASCADE)
     minimum_price = models.DecimalField(max_digits=20, decimal_places=2)
     name = models.CharField(max_length=32, blank=False)
     photo = models.ImageField(default="profile.png",
@@ -37,8 +37,8 @@ class art(models.Model):
 
 
 class auction(models.Model):
-    art = models.ForeignKey(art, on_delete=DO_NOTHING)
-    client = models.ForeignKey(client, on_delete=DO_NOTHING)
+    art = models.ForeignKey(art, on_delete=models.CASCADE)
+    client = models.ForeignKey(client, on_delete=models.CASCADE)
     bid_amount = models.DecimalField(max_digits=20, decimal_places=2)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
