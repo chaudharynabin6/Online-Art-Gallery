@@ -10,8 +10,9 @@ from client.models import artist, client
 
 class exhibtion(models.Model):
     name = models.CharField(max_length=32, blank=False)
-    exhibtion_day = models.DateField(blank=False)
-    exhibtion_location = models.CharField(blank=False, max_length=32)
+    is_active = models.BooleanField(default=False)
+    exhibition_day = models.DateField(blank=False)
+    exhibition_location = models.CharField(blank=False, max_length=32)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
