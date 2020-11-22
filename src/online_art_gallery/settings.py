@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     # adding cart app
     "cart.apps.CartConfig",
     # adding exhibition app
-    "exhibition.apps.ExhibitionConfig"
+    "exhibition.apps.ExhibitionConfig",
+    # ading humanize for template
+    'django.contrib.humanize',
 
 ]
 

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load humanize %}
 {% block content %}
 <div class="ui container">
     <div class="ui grid two column">
@@ -13,8 +13,12 @@
         current top bid
         </h5>
         <h3 class="ui header">
-        Rs. {{art.minimum_price}}
+        Rs. {{art.minimum_price|intcomma}}
         </h3>
+        {% comment %} Top 5 bids {% endcomment %}
+        {% if top_5_auctions %}
+        <h1 class="ui header  aligned center">Top 5 bids</h1>
+        {% endif %}
         {% for auction in top_5_auctions %}
         <div class="ui segment">
         <div class="ui grid two column">
@@ -23,7 +27,7 @@
             <h5 class="ui header blue">{{auction.client.user}}</h5>
         </div>
         <div class="column">
-        <h2 class="ui header pink">RS. {{auction.bid_amount}}</h2>
+        <h2 class="ui header pink">RS. {{auction.bid_amount|intword}}</h2>
         </div>
         </div>
         
@@ -65,12 +69,12 @@
             <div class="ui segment">
             
             <h2  class="ui header green center aligned">
-            {{art.name}}
+            {{art.name|truncatechars:20}}
             </h2>
             <div class="ui  segment">
                 <h3 class="ui header">Detail</h3>
                 <h5 class="ui header">
-                {{art.description}}
+                {{art.description|truncatechars:50}}
                 </h5>
             </div>
             <div class="ui segment">
@@ -84,7 +88,7 @@
                          <img class="ui image tiny circular" src="{{MEDIA_URL}}{{art.artist.profile_photo}}" alt="loading" srcset="">
                     </div>
                     <div class="column">
-                        <h5 class="ui header green">{{art.artist.first_name}} {{art.artist.last_name}}</h5>
+                        <h5 class="ui header green">{{art.artist.user}} {{art.artist.last_name}}</h5>
                     </div>
                 </div>
             </div>
