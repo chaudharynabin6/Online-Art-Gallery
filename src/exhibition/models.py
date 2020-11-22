@@ -8,7 +8,7 @@ from client.models import artist, client
 # Create your models here.
 
 
-class exhibtion(models.Model):
+class exhibition(models.Model):
     name = models.CharField(max_length=32, blank=False)
     is_active = models.BooleanField(default=False)
     exhibition_day = models.DateField(blank=False)
@@ -21,7 +21,7 @@ class exhibtion(models.Model):
 
 
 class art(models.Model):
-    exhibtion = models.ForeignKey(exhibtion, on_delete=models.CASCADE)
+    exhibition = models.ForeignKey(exhibition, on_delete=models.CASCADE)
     artist = models.ForeignKey(artist, on_delete=models.CASCADE)
     minimum_price = models.DecimalField(max_digits=20, decimal_places=2)
     name = models.CharField(max_length=32, blank=False)

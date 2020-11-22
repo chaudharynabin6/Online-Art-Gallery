@@ -3,7 +3,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from .forms import add_update_art_form, add_update_exhibition_form
 from client.models import client, artist
-from .models import exhibtion, art, auction as auc
+from .models import exhibition, art, auction as auc
 from django.contrib.auth.models import User
 from django.db.models import Max
 from decimal import Context, Decimal
@@ -14,6 +14,7 @@ def exhibition_hall(request):
     """
     This function is home for the exhibition hall
     """
+    ex = exhibition.objects.filter(is_active=True).first()
     if not request.user.is_authenticated:
         return render(request, "exhibition/not-found.html", {
             "error": "you must login first"
@@ -25,15 +26,16 @@ def exhibition_hall(request):
         is_artist = False
     # if admin login
     if(request.user.is_superuser):
-        arts = art.objects.filter(is_approved=False).order_by('date_created')
+        arts = art.objects.filter(exhibition=ex,
+                                  is_approved=False).order_by('date_created')
     # if artist login
     elif artist.objects.filter(user=request.user).first():
-        arts = art.objects.filter(
-            artist=artist.objects.filter(user=request.user).first())
+        arts = art.objects.filter(exhibition=ex,
+                                  artist=artist.objects.filter(user=request.user).first())
 
     else:
         #  if client logined
-        arts = art.objects.filter(is_approved=True)
+        arts = art.objects.filter(exhibition=ex, is_approved=True)
     context = {
         "arts": arts,
         "is_artist": is_artist
@@ -42,13 +44,14 @@ def exhibition_hall(request):
 
 
 def add_art(request):
+    ex = exhibition.objects.filter(is_active=True).first()
     current_artist = artist.objects.filter(user=request.user).first()
     if(current_artist):
         form = add_update_art_form()
         if request.method == "POST":
             form = add_update_art_form(request.POST, request.FILES)
             current_art = form.save(commit=False)
-            current_art.exhibtion = exhibtion.objects.first()
+            current_art.exhibition = ex
             current_art.artist = current_artist
             current_art.save()
             return redirect("exhibition:exhibition-hall")
@@ -62,11 +65,12 @@ def add_art(request):
 
 
 def art_showcase(request, art_id):
+    ex = exhibition.objects.filter(is_active=True).first()
     if not request.user.is_authenticated:
         return render(request, "exhibition/not-found.html", {
             "error": "you must login first"
         })
-    current_art = art.objects.filter(id=art_id).first()
+    current_art = art.objects.filter(exhibition=ex, id=art_id).first()
     top_5_auctions = auc.objects.filter(
         art=current_art).order_by("-bid_amount")[:5]
     if(client.objects.filter(user=request.user)):
@@ -82,9 +86,10 @@ def art_showcase(request, art_id):
 
 
 def approve_art(request):
+    ex = exhibition.objects.filter(is_active=True).first()
     if(request.user.is_superuser and request.method == "POST"):
         art_id = request.POST.get('art_id')
-        art_obj = art.objects.get(id=art_id)
+        art_obj = art.objects.filter(exhibition=ex, id=art_id).first()
         art_obj.is_approved = True
         art_obj.save()
         return redirect("exhibition:exhibition-hall")
@@ -150,9 +155,9 @@ def add_exhibition(request):
 
 def manage_exhibition(request):
     if(request.user.is_superuser):
-        exhibtions = exhibtion.objects.all()
+        exhibitions = exhibition.objects.all()
         context = {
-            "exhibitions": exhibtions,
+            "exhibitions": exhibitions,
         }
         return render(request, "exhibition/manage-exhibition.html", context)
     else:
@@ -163,12 +168,14 @@ def manage_exhibition(request):
 
 def activate_exhibition(request):
     if(request.user.is_superuser and request.method == "POST"):
-        exhibtion_id = request.POST.get("exhibition_id")
-        current_exhibition = exhibtion.objects.filter(id=exhibtion_id).first()
+        exhibition_id = request.POST.get("exhibition_id")
+        current_exhibition = exhibition.objects.filter(
+            id=exhibition_id).first()
         if(current_exhibition):
             current_exhibition.is_active = True
             current_exhibition.save()
-            exhibtion.objects.exclude(id=exhibtion_id).update(is_active=False)
+            exhibition.objects.exclude(
+                id=exhibition_id).update(is_active=False)
             return redirect("exhibition:manage-exhibition")
     else:
         return render(request, "exhibition/not-found.html", {
@@ -178,8 +185,9 @@ def activate_exhibition(request):
 
 def deactivate_exhibition(request):
     if(request.user.is_superuser and request.method == "POST"):
-        exhibtion_id = request.POST.get("exhibition_id")
-        current_exhibition = exhibtion.objects.filter(id=exhibtion_id).first()
+        exhibition_id = request.POST.get("exhibition_id")
+        current_exhibition = exhibition.objects.filter(
+            id=exhibition_id).first()
         if(current_exhibition):
             current_exhibition.is_active = False
             current_exhibition.save()
