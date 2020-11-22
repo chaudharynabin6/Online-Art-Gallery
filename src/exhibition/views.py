@@ -54,16 +54,17 @@ def add_art(request):
 
 
 def art_showcase(request, art_id):
-
     current_art = art.objects.filter(id=art_id).first()
+    top_5_auctions = auc.objects.filter(
+        art=current_art).order_by("-bid_amount")[:5]
     if(client.objects.filter(user=request.user)):
         is_client = True
     else:
         is_client = False
-    print(current_art)
     context = {
         "art": current_art,
-        "is_client": is_client
+        "is_client": is_client,
+        "top_5_auctions": top_5_auctions
     }
     return render(request, "exhibition/art-showcase.html", context)
 

@@ -15,6 +15,21 @@
         <h3 class="ui header">
         Rs. {{art.minimum_price}}
         </h3>
+        {% for auction in top_5_auctions %}
+        <div class="ui segment">
+        <div class="ui grid two column">
+        <div class="column">
+            <img class="ui image mini circular" src="{{MEDIA_URL}}{{auction.client.profile_photo}}" alt="">
+            <h5 class="ui header blue">{{auction.client.user}}</h5>
+        </div>
+        <div class="column">
+        <h2 class="ui header pink">RS. {{auction.bid_amount}}</h2>
+        </div>
+        </div>
+        
+        </div>
+        
+        {% endfor %}
         {% if request.user.is_superuser %}
         <div class="ui raised segment">
         
