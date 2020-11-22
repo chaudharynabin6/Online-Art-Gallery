@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+<div class="ui container">
+<a class="ui button primary" href="{% url 'exhibition:add-exhibition' %}">Add exhibition</a>
+</div>
+<br>
+<br>
+<div class="ui container">
+<div class="ui three column grid">
+{% for exhibition in exhibitions  %}
+<div class="column">
+    <div style="width:80%;"class="ui segment raised">
+    <h2 class="ui header aligned center">
+    {{exhibition.name|truncatechars:20}}
+    </h2>
+
+    <div class="ui segment">
+    <h5 class="ui header green">
+    <i class="map outline icon"></i>
+    {{exhibition.exhibition_location|truncatechars:20}}
+    </h5>
+    </div>
+    <div class="ui segment">
+    <h5 class="ui header green">
+    <i class="calendar outline icon"></i>
+    {{exhibition.exhibition_day|naturalday}}
+    </h5>
+    </div>
+    <div class="ui segment">
+    {% if exhibition.is_active %}
+    <div class="ui grid two column">
+    <div class="column">
+    <button class=" ui button green disabled">Activated</button>
+    </div>
+    <div class="column">
+    <form action="{% url 'exhibition:deactivate-exhibition' %}" method="POST" class='like-form' id='{{art.id}}'>
+            {% csrf_token %}
+            <input type="hidden" name="exhibition_id" value={{exhibition.id}}>
+            <button type="submit" class="ui button">
+            Deactivate
+            </button>
+    </form>
+    </div>
+
+    
+    </div>
+    
+    
+    {% else %}
+    <form action="{% url 'exhibition:activate-exhibition' %}" method="POST" class='like-form' id='{{art.id}}'>
+            {% csrf_token %}
+            <input type="hidden" name="exhibition_id" value={{exhibition.id}}>
+            <button type="submit" class="ui button">
+            Activate
+            </button>
+    </form>
+
+    {% endif %}
+    </div>
+</div>
+
+</div>
+{% endfor %}
+</div>
+{% endblock content %}

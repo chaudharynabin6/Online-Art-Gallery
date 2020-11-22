@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if is_artist %}
 <div class="ui container">
+{% if is_artist %}
 <a class="ui button primary" href="{% url 'exhibition:add-art' %}">Add Art</a>
+{% endif %}
+{% if request.user.is_superuser %}
+<a class="ui button primary" href="{% url 'exhibition:manage-exhibition' %}">Manage Exhibition hall</a>
+{% endif %}
 </div>
 <br>
-{% endif %}
 <div class="ui container">
 <div class="ui grid three column">
 {% for art in arts %}

@@ -1,11 +1,12 @@
 from django.http import request
+from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from .forms import add_update_art_form
+from .forms import add_update_art_form, add_update_exhibition_form
 from client.models import client, artist
 from .models import exhibtion, art, auction as auc
 from django.contrib.auth.models import User
 from django.db.models import Max
-from decimal import Decimal
+from decimal import Context, Decimal
 # Create your views here.
 
 
@@ -13,18 +14,25 @@ def exhibition_hall(request):
     """
     This function is home for the exhibition hall
     """
+    if not request.user.is_authenticated:
+        return render(request, "exhibition/not-found.html", {
+            "error": "you must login first"
+        })
+    # is artist or not
     if(artist.objects.filter(user=request.user).first()):
         is_artist = True
     else:
         is_artist = False
-
+    # if admin login
     if(request.user.is_superuser):
         arts = art.objects.filter(is_approved=False).order_by('date_created')
+    # if artist login
     elif artist.objects.filter(user=request.user).first():
         arts = art.objects.filter(
             artist=artist.objects.filter(user=request.user).first())
 
     else:
+        #  if client logined
         arts = art.objects.filter(is_approved=True)
     context = {
         "arts": arts,
@@ -54,6 +62,10 @@ def add_art(request):
 
 
 def art_showcase(request, art_id):
+    if not request.user.is_authenticated:
+        return render(request, "exhibition/not-found.html", {
+            "error": "you must login first"
+        })
     current_art = art.objects.filter(id=art_id).first()
     top_5_auctions = auc.objects.filter(
         art=current_art).order_by("-bid_amount")[:5]
@@ -83,6 +95,10 @@ def approve_art(request):
 
 
 def auction(request):
+    if not request.user.is_authenticated:
+        return render(request, "exhibition/not-found.html", {
+            "error": "you must login first"
+        })
     current_client = client.objects.filter(user=request.user).first()
     if(current_client and request.method == "POST"):
         bid_amount = request.POST.get('bid_amount')
@@ -113,3 +129,62 @@ def auction(request):
             })
 
     return redirect("exhibition:art-showcase", art_id)
+
+
+def add_exhibition(request):
+    if(request.user.is_superuser):
+        form = add_update_exhibition_form()
+        if(request.method == "POST"):
+            form = add_update_exhibition_form(request.POST)
+            form.save()
+            return redirect("exhibition:manage-exhibition")
+        context = {
+            "form": form
+        }
+        return render(request, "exhibition/add-update-exhibition.html", context)
+    else:
+        return render(request, "exhibition/not-found.html", {
+            "error": "you must be administrator for adding exhibition"
+        })
+
+
+def manage_exhibition(request):
+    if(request.user.is_superuser):
+        exhibtions = exhibtion.objects.all()
+        context = {
+            "exhibitions": exhibtions,
+        }
+        return render(request, "exhibition/manage-exhibition.html", context)
+    else:
+        return render(request, "exhibition/not-found", {
+            "error": "you must be super user to manage the exhibition"
+        })
+
+
+def activate_exhibition(request):
+    if(request.user.is_superuser and request.method == "POST"):
+        exhibtion_id = request.POST.get("exhibition_id")
+        current_exhibition = exhibtion.objects.filter(id=exhibtion_id).first()
+        if(current_exhibition):
+            current_exhibition.is_active = True
+            current_exhibition.save()
+            exhibtion.objects.exclude(id=exhibtion_id).update(is_active=False)
+            return redirect("exhibition:manage-exhibition")
+    else:
+        return render(request, "exhibition/not-found.html", {
+            "error": "you must be administrator for adding exhibition"
+        })
+
+
+def deactivate_exhibition(request):
+    if(request.user.is_superuser and request.method == "POST"):
+        exhibtion_id = request.POST.get("exhibition_id")
+        current_exhibition = exhibtion.objects.filter(id=exhibtion_id).first()
+        if(current_exhibition):
+            current_exhibition.is_active = False
+            current_exhibition.save()
+        return redirect("exhibition:manage-exhibition")
+    else:
+        return render(request, "exhibition/not-found.html", {
+            "error": "you must be administrator for adding exhibition"
+        })
