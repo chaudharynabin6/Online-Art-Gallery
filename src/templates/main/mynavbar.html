@@ -6,6 +6,9 @@
         <div class="item">
         <a href="{% url 'artGallery:home' %}">Home</a>
         </div>
+        <div class="item">
+        <a href="{% url 'exhibition:exhibition-hall' %}">Exhibition</a>
+        </div>
 
         {% if request.user.is_authenticated %}
         <div class="item">
