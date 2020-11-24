@@ -1,4 +1,4 @@
-
+{% load humanize %}
 <div id="my-nav" class="ui inverted green top fixed menu">
 
     
@@ -18,6 +18,9 @@
         <a href="{% url 'client:dashboard' %}">My Dashboard</a>
         </div>
         <div class="right menu">
+        <div class="item">
+        <i class="icon user circle white large"></i>{{request.user|title}}
+        </div>
         <div class="item">
         <a href="{% url 'authentication:logout' %}">Logout</a>
         </div>
