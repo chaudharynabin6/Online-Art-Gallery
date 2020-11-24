@@ -15,6 +15,11 @@ def exhibition_hall(request):
     This function is home for the exhibition hall
     """
     ex = exhibition.objects.filter(is_active=True).first()
+
+    if(ex):
+        is_exhibition = True
+    else:
+        is_exhibition = False
     if not request.user.is_authenticated:
         return render(request, "exhibition/not-found.html", {
             "error": "you must login first"
@@ -38,7 +43,8 @@ def exhibition_hall(request):
         arts = art.objects.filter(exhibition=ex, is_approved=True)
     context = {
         "arts": arts,
-        "is_artist": is_artist
+        "is_artist": is_artist,
+        "is_exhibition": is_exhibition
     }
     return render(request, "exhibition/exhibition-hall.html", context)
 

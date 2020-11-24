@@ -2,8 +2,11 @@
 
 {% block content %}
 <div class="ui container">
-{% if is_artist %}
+{% if is_artist and is_exhibition %}
 <a class="ui button primary" href="{% url 'exhibition:add-art' %}">Add Art</a>
+{% endif %}
+{% if not is_exhibition %}
+<h1 class="ui header blue aligned center">No exhibition currently availbale</h1>
 {% endif %}
 {% if request.user.is_superuser %}
 <a class="ui button primary" href="{% url 'exhibition:manage-exhibition' %}">Manage Exhibition hall</a>
