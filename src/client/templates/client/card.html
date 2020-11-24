@@ -1,9 +1,10 @@
+{% load humanize %}
 <div id="c-card" class="ui card">
     <div id="c-card__pading"class="content">
     <img src="{{MEDIA_URL}}{{art.photo1}}" alt="" class="ui  image">
                 
     <div id="c-card__top">
-    <div id="margin-top-5 margin-bottom-5"><h5 class="ui header centered green label fluid">{{art.art_name}}</h5></div>
+    <div id="margin-top-5 margin-bottom-5"><h5 class="ui header centered green label fluid">{{art.art_name|title}}</h5></div>
     <div class="ui grid middle aligned">
     <div class="row">
         <div class="eight wide column">
@@ -12,6 +13,11 @@
         <div class="eight wide column">
 
         </div>
+    </div>
+    
+    </div>
+    <div class="row">
+    <h5 class="ui header blue aligned center">Rs. {{art.price|intcomma}}</h5>
     </div>
     
     </div>
