@@ -28,7 +28,8 @@ urlpatterns = [
     # for artGallery
     path("artgallery/", include("artGallery.urls")),
     path("dashboard/", include(("client.urls"))),
-    path("exhibition/", include("exhibition.urls"))
+    path("exhibition/", include("exhibition.urls")),
+    path("search/", include("search.urls"),),
 
 ]
 

@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     "exhibition.apps.ExhibitionConfig",
     # ading humanize for template
     'django.contrib.humanize',
+    # adding search app
+    'search.apps.SearchConfig',
+    'django.contrib.postgres',
 
 ]
 
