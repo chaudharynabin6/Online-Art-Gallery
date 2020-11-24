@@ -7,10 +7,13 @@
         <a href="{% url 'artGallery:home' %}">Home</a>
         </div>
         <div class="item">
+        <a href="{% url 'search:search-art' %}">Search</a>
+        </div>
+        {% if request.user.is_authenticated %}
+
+        <div class="item">
         <a href="{% url 'exhibition:exhibition-hall' %}">Exhibition</a>
         </div>
-
-        {% if request.user.is_authenticated %}
         <div class="item">
         <a href="{% url 'client:dashboard' %}">My Dashboard</a>
         </div>
@@ -21,7 +24,7 @@
         </div>
     
 
-    {% endif %}
+        {% endif %}
 
     {% if not request.user.is_authenticated%}
     <div class="right menu">
