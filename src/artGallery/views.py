@@ -8,7 +8,7 @@ from django.http import HttpResponse
 
 
 def home(request):
-    if(not(request.user.is_authenticated)):
+    if(not(request.user.is_authenticated) or request.user.is_superuser):
         arts = [(art, art.artist_set.all().first())
                 for art in art.objects.all()]
         print(arts)
@@ -26,10 +26,16 @@ def home(request):
                 "arts": arts,
             })
         else:
-            return HttpResponse("you must login as client first or logout first")
+            # for artist user
+            return redirect("client:dashboard")
 
 
 def add_to_cart(request):
+    current_artist = artist.objects.filter(user=request.user).first()
+    if(not(request.user.is_authenticated) or request.user.is_superuser or current_artist):
+        return render(request, "client/not-found.html", {
+            "error": "you must be client"
+        })
     user = request.user
     if request.method == 'POST':
         art_id = request.POST.get('art_id')
