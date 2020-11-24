@@ -8,7 +8,7 @@ from artGallery.models import art
 
 def dashboard(request):
     user = request.user
-    if(not(user.is_authenticated)):
+    if(not(user.is_authenticated) or request.user.is_superuser):
         return render(request, "client/not-found.html", context={
             "error": "you must login as client or artist first"
         })
@@ -38,6 +38,10 @@ def dashboard(request):
 
 
 def update_client_or_artist(request):
+    if(not(request.user.is_authenticated) or request.user.is_superuser):
+        return render(request, "client/not-found.html", context={
+            "error": "you must login as client or artist first"
+        })
 
     if(not(request.user.is_authenticated)):
         return render(request, "client/not-found.html", context={
@@ -109,6 +113,10 @@ def update_client_or_artist(request):
 
 
 def add_art(request):
+    if(not(request.user.is_authenticated) or request.user.is_superuser):
+        return render(request, "client/not-found.html", context={
+            "error": "you must login as client or artist first"
+        })
     current_artist = artist.objects.filter(user=request.user).first()
     if(current_artist):
         is_new_art_added = False

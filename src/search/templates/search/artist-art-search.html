@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block css %}
+#search{
+    display:block;
+    margin:10px auto;
+    width: 25%;
+    height: 60px;
+    font-size: 25px;
+    outline: none;
+    border-radius:200px;
+    border:none;
+    box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+  background: #EEF2F7;
+  color:green;
+  transition: all .25s ease-in;
+}
+#search:focus{
+    
+    width: 100%;
+    border: none;
+}
+#container{
+    min-height: 20vh;
+}
+#search-button{
+    display: block;
+    margin: 30px auto;
+    background-color:green;
+    font-size:20px;
+    padding:10px;
+    border:none;
+    border-radius:200px;
+    color:white;
+    width:200px;
+    outline:none;
+    transition: all .25s ease-in;
+}
+#search-button:hover{
+    background-color:darkgreen;
+    width:250px;
+
+}
+#search-button:click{
+    background-color:darkgreen;
+}
+{% endblock css %}
+{% block content %}
+
+<div id="container" class="ui container">
+<form action="{% url 'search:search-art' %}">
+{% csrf_token %}
+<input id ="search" type="text" name="search_art" placeholder="search art">
+<button id ="search-button" type="submit">Search</button>
+</form>
+</div>
+<div class="ui container">
+<div class="ui four column grid">
+{% for art in arts %}
+
+<div class="column">
+{% include "client/card.html" %}
+</div>
+{% empty%}
+<div class="column">
+<h1 class="ui header green">No arts found</h1>
+</div>
+{% endfor %}
+</div>
+</div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+<script>
+$(document).ready(function(){
+    $(".rating").rating("disable");
+    
+    $("#grid").css({
+        "margin-left":"0px",
+        "margin-right":"0px",
+        "margin-top":"5px",
+        "margin-bottom":"5px"
+        });
+    $(".ui.label:last-child ").css({"margin-right":"-1rem"});
+});
+</script>
+
+{% endblock scripts %}
