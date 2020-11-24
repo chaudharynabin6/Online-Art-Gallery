@@ -167,7 +167,7 @@ def manage_exhibition(request):
         }
         return render(request, "exhibition/manage-exhibition.html", context)
     else:
-        return render(request, "exhibition/not-found", {
+        return render(request, "exhibition/not-found.html", {
             "error": "you must be super user to manage the exhibition"
         })
 

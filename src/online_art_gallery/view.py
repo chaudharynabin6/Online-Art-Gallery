@@ -12,4 +12,4 @@ def home_view(request):
         "hello": "hello"
     }
     dict_to_table(context)
-    return redirect("client:dashboard")
+    return redirect("artGallery:home")
