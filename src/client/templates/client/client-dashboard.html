@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 {% block css %}
 #social__container{
     position:relative;
@@ -61,7 +62,7 @@
                     </div>
                     {% comment %} for basic detail  of client {% endcomment %}
                     <div class="column ">
-                    <h1 class="ui header blue">{{client.first_name}} {{client.last_name}}</h1>
+                    <h1 class="ui header blue">{{client.first_name|truncatechars:20}} {{client.last_name|truncatechars:20}}</h1>
                     <h4 class="ui header orange"><i class="gift icon"></i>Art lover{{client.one_word_about_me}}</h4>
                     <h2 class="ui  header green"><i class="icon flag"></i>Nepal{{client.country}}</h2>
                     <h3 class="ui header blue"><a href = "mailto:{{client.user.email}}"><i class="mail outline icon"></i>{{client.user.email}}</a></h3>

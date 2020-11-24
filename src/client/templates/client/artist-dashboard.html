@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 {% block css %}
 #social__container{
     position:relative;
@@ -61,7 +62,7 @@
                     </div>
                     {% comment %} for basic detail  of artist {% endcomment %}
                     <div class="column ">
-                    <h1 class="ui header blue">{{artist.first_name}} {{artist.last_name}}</h1>
+                    <h1 class="ui header blue">{{artist.first_name|title|truncatechars:20}} {{artist.last_name|title|truncatechars:20}}</h1>
                     <h4 class="ui header orange"><i class="gift icon"></i>Art lover{{artist.one_word_about_me}}</h4>
                     <h2 class="ui  header green"><i class="icon flag"></i>Nepal{{artist.country}}</h2>
                     <h3 class="ui header blue"><a href = "mailto:{{artist.user.email}}"><i class="mail outline icon"></i>{{artist.user.email}}</a></h3>
@@ -73,7 +74,7 @@
         <div id="social__container" class="ui column segment">
         {% comment %} bio section {% endcomment %}
             <h1 class="ui centered header pink"><i class="heart icon"></i>My bio</h1>
-            <h5 class="ui header centered"> {{artist.bio}}</h5>
+            <h5 class="ui header centered"> {{artist.bio|truncatechars:100}}</h5>
         <div id="social__icons">
                     <div class="ui grid">
                     {% comment %} test {% endcomment %}
@@ -107,7 +108,7 @@
 
     </div>
      <div class="ui bottom attached active tab segment">
-     <div id="m-small-top" class="ui grid">
+     <div id="m-small-top" class="ui container">
        <a href="{% url 'client:add-art' %}"class="ui  button basic small pink">
         <i class="add square icon"></i>
         New Art
