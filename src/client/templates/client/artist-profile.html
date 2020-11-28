@@ -1,0 +1,72 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'client/artistProfile/css/main.css' %}">
+    <title>My profile</title>
+</head>
+<body>
+   
+<section class="profile">
+  <header class="header">
+    <div class="details">
+      <img src="{{MEDIA_URL}}{{artist.profile_photo}}" alt="John Doe" class="profile-pic">
+      <h1 class="heading">{{request.user|truncatechars:20|title}}</h1>
+      <div class="location">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12 ,2Z"></path>
+        </svg>
+        <p>Kathmandu, Nepal</p>
+      </div>
+      <div class="stats">
+        <div class="col-4">
+          <h4>{{total_recent_arts|intcomma}}</h4>
+          <p>My Total Arts</p>
+        </div>
+        <div class="col-4">
+          <h4>{{artist.date_updated|naturalday}}</h4>
+          <p>Profile Updated</p>
+        </div>
+        <div class="col-4">
+          <h4>{{artist.date_created|naturalday}}</h4>
+          <p>Profile Created</p>
+        </div>
+      </div>
+      <div class="bio">
+      <p>
+      {{artist.bio|truncatechars:200|lower}}
+      </p>
+      <h4>Bio</h4>
+      </div>
+    </div>
+  </header>
+</section>
+<section>
+<h1 class="title" style="color:pink;">Recent Arts</h1>
+<div id="app" class="container">
+{% for art,artist in recent_arts %}
+        <a href="{% url 'artGallery:art-detail' art.id %}">
+        <card data-image="{{MEDIA_URL}}{{art.photo1}}">
+            <h1 slot="header">{{art.art_name|truncatechars:6|title}}</h1>
+            <p slot="content">{{art.art_name|truncatechars:20|lower}}</p>
+        </card>
+        </a>
+{% endfor %}
+</div>
+</div>
+
+
+
+
+
+</section> 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
+<script src="{% static 'client/artistProfile/js/main.js' %}"></script>  
+
+</body>
+</html>
+

@@ -37,6 +37,27 @@ def dashboard(request):
             return render(request, "client/artist-dashboard.html", context)
 
 
+def artist_profile(request):
+    user = request.user
+    if(not(user.is_authenticated) or request.user.is_superuser):
+        return render(request, "client/not-found.html", context={
+            "error": "you must login as client or artist first"
+        })
+    else:
+        current_artist = artist.objects.filter(user=request.user).first()
+        if(current_artist):
+            artist_arts = [(art, art.artist_set.all().first())
+                           for art in current_artist.art_list.all().order_by('-date_created')[:10]]
+            context = {
+                "artist": current_artist,
+                "recent_arts":  artist_arts,
+                "total_recent_arts": len(artist_arts)
+            }
+            return render(request, "client/artist-profile.html", context)
+        else:
+            return render(request, "client/not-found.html", {"error": "you are not artist"})
+
+
 def client_profile(request):
     user = request.user
     if(not(user.is_authenticated) or request.user.is_superuser):
