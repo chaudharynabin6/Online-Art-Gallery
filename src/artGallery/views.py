@@ -27,7 +27,13 @@ def home(request):
             })
         else:
             # for artist user
-            return redirect("client:dashboard")
+            current_artist = artist.objects.filter(user=request.user).first()
+            arts = [(art, art.artist_set.all().first())
+                    for art in current_artist.art_list.all()]
+            return render(request, "artgallery/index.html", {
+
+                "arts": arts,
+            })
 
 
 def art_detail(request, art_id):
