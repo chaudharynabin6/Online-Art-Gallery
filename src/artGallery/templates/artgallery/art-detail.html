@@ -1,0 +1,61 @@
+{% load static %}
+{% load humanize %}
+<html lang="en" dir="ltr"><head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'artDetail/css/main.css' %}">
+  </head>
+  <body style="background: rgb(249, 202, 36);">
+  {% for art,artist in arts %}
+    <div class="product-card">
+    <div class="art-container">
+        <div>
+        <h1>{{art.art_name|truncatechars:10|title}}</h1>
+        <p>{{art.date_created|naturalday}}</p>
+        </div>
+    
+        <div class="artist-photo">
+        <img src="{{MEDIA_URL}}{{artist.profile_photo}}" alt="" class="artist__img">
+        </div>
+    </div>
+      
+      <div class="product-pic" style="background-image: url(&quot;&quot;);"></div>
+      <div class="product-colors">
+        <span class="blue" data-color="#7ed6df" data-pic="url({{MEDIA_URL}}{{art.photo1}})"></span>
+        <span class="green" data-color="#badc58" data-pic="url({{MEDIA_URL}}{{art.photo2}})"></span>
+        <span class="yellow active" data-color="#f9ca24" data-pic="url({{MEDIA_URL}}{{art.photo3}})"></span>
+        <span class="rose" data-color="#ff7979" data-pic="url({{MEDIA_URL}}{{art.photo4}})"></span>
+      </div>
+      <div class="product-info">
+        <div class="product-price" style="color: rgb(249, 202, 36);">Rs. {{art.price}}</div>
+        <form class='product-form' action="{% url 'artGallery:add-to-cart' %}" method="POST"  id='{{art.id}}'>
+                            {% csrf_token %}
+                            <input type="hidden" name="art_id" value={{art.id}}>
+
+        <button class='product-button' type="submit" >
+                                 Add to Cart
+         </button>
+          </form>
+        {% comment %} <a href="#" class="product-button" style="color: rgb(249, 202, 36);">Add to Cart</a> {% endcomment %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script>
+    $(document).ready(()=>{
+        
+        $(".product-colors span").click(function(){
+        $(".product-colors span").removeClass("active");
+        $(this).addClass("active");
+        $("body").css("background",$(this).attr("data-color"));
+        $(".product-price").css("color",$(this).attr("data-color"));
+        $(".product-button").css("color",$(this).attr("data-color"));
+        $(".product-pic").css("background-image",$(this).attr("data-pic"));
+      }).click();
+    })
+      
+    </script>
+  
+
+</body></html>

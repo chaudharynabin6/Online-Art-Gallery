@@ -30,12 +30,42 @@ def home(request):
             return redirect("client:dashboard")
 
 
-def add_to_cart(request):
-    current_artist = artist.objects.filter(user=request.user).first()
-    if(not(request.user.is_authenticated) or request.user.is_superuser or current_artist):
-        return render(request, "client/not-found.html", {
-            "error": "you must be client"
+def art_detail(request, art_id):
+    if(not(request.user.is_authenticated) or request.user.is_superuser):
+        arts = [(art, art.artist_set.all().first())
+                for art in art.objects.filter(id=art_id)]
+        print(arts)
+        return render(request, "artgallery/art-detail.html", {
+            "arts": arts,
         })
+    else:
+        client_user = client.objects.filter(user=request.user)
+        arts = [(art, art.artist_set.all().first())
+                for art in art.objects.filter(id=art_id)]
+        if(client_user):
+            # for client user
+            return render(request, "artgallery/art-detail.html", {
+
+                "arts": arts,
+            })
+        else:
+            # for artist user
+            return redirect("client:dashboard")
+
+
+def add_to_cart(request):
+
+    if(not(request.user.is_authenticated) or request.user.is_superuser):
+        return render(request, "client/not-found.html", {
+            "error": "Login as client first"
+        })
+
+    current_artist = artist.objects.filter(user=request.user)
+    if(current_artist):
+        return render(request, "client/not-found.html", {
+            "error": "Login as client first"
+        })
+
     user = request.user
     if request.method == 'POST':
         art_id = request.POST.get('art_id')
