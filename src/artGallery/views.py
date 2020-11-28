@@ -39,18 +39,14 @@ def art_detail(request, art_id):
             "arts": arts,
         })
     else:
-        client_user = client.objects.filter(user=request.user)
         arts = [(art, art.artist_set.all().first())
                 for art in art.objects.filter(id=art_id)]
-        if(client_user):
-            # for client user
-            return render(request, "artgallery/art-detail.html", {
 
-                "arts": arts,
-            })
-        else:
-            # for artist user
-            return redirect("client:dashboard")
+        # for client user
+        return render(request, "artgallery/art-detail.html", {
+
+            "arts": arts,
+        })
 
 
 def add_to_cart(request):
