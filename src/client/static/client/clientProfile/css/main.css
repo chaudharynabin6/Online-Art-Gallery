@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
+
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.header {
+  min-height: 60vh;
+  background: #009fff;
+  background: linear-gradient(to right, #ec2f4b, #009fff);
+  color: white;
+  clip-path: ellipse(100vw 60vh at 50% 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.details {
+  text-align: center;
+}
+
+.profile-pic {
+  height: 6rem;
+  width: 6rem;
+  object-fit: center;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.location p {
+  display: inline-block;
+}
+
+.location svg {
+  vertical-align: middle;
+}
+
+.stats {
+  display: flex;
+}
+
+.stats .col-4 {
+  width: 10rem;
+  text-align: center;
+}
+
+.heading {
+  font-weight: 400;
+  font-size: 1.3rem;
+  margin: 1rem 0;
+}
+
+.bio {
+  width: 50%;
+  margin: 0px auto;
+  border: 1px solid rgba(17, 19, 17, 0.007);
+}
+
+.bio p {
+  text-align: center;
+  text-justify: center;
+}

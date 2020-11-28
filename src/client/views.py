@@ -37,6 +37,32 @@ def dashboard(request):
             return render(request, "client/artist-dashboard.html", context)
 
 
+def client_profile(request):
+    user = request.user
+    if(not(user.is_authenticated) or request.user.is_superuser):
+        return render(request, "client/not-found.html", context={
+            "error": "you must login as client or artist first"
+        })
+    else:
+        current_client = client.objects.filter(user=request.user).first()
+        if(current_client):
+            if(current_client.mycart):
+                # arts = list(current_client.mycart.art_list.all())
+                cart_arts = [(art, art.artist_set.all().first())
+                             for art in current_client.mycart.art_list.all()]
+            else:
+                arts = []
+            context = {
+                "client": current_client,
+                "cart_arts":  cart_arts,
+                "total_cart_arts": len(cart_arts)
+            }
+            return render(request, "client/client-profile.html", context)
+        else:
+
+            return render(request, "client/not-found.html", {"error": "you are not client"})
+
+
 def update_client_or_artist(request):
     if(not(request.user.is_authenticated) or request.user.is_superuser):
         return render(request, "client/not-found.html", context={
