@@ -15,7 +15,9 @@
         </div>
     
         <div class="artist-photo">
+        <a href="{% url 'client:view-artist-profile' artist.user %}">
         <img src="{{MEDIA_URL}}{{artist.profile_photo}}" alt="" class="artist__img">
+        </a>
         </div>
     </div>
       

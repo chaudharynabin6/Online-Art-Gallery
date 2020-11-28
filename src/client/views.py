@@ -3,7 +3,33 @@ from .models import client, artist
 from .forms import client_update_form, artist_update_form
 from artGallery.forms import art_add_or_update
 from artGallery.models import art
+from django.contrib.auth.models import User
 # Create your views here.
+
+
+def view_artist_profile(request, artist_id):
+    user = request.user
+    if(not(user.is_authenticated) or request.user.is_superuser):
+        return render(request, "client/not-found.html", context={
+            "error": "you must login as client or artist first"
+        })
+    else:
+        if request.method == "GET":
+            user = User.objects.filter(username=str(artist_id)).first()
+
+            if(user):
+                current_artist = artist.objects.filter(user=user).first()
+                if(current_artist):
+                    artist_arts = [(art, art.artist_set.all().first())
+                                   for art in current_artist.art_list.all().order_by('-date_created')[:10]]
+                    context = {
+                        "artist": current_artist,
+                        "recent_arts":  artist_arts,
+                        "total_recent_arts": len(artist_arts)
+                    }
+                    return render(request, "client/artist-profile.html", context)
+                else:
+                    return render(request, "client/not-found.html", {"error": "artist  not found"})
 
 
 def dashboard(request):
