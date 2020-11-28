@@ -13,13 +13,14 @@
 
 </head>
 <body>
- <h1 class="title">Hover over the cards</h1>
 <div id="app" class="container">
 {% for art,artist in arts %}
-        <card data-image="{{MEDIA_URL}}{{art.photo1}}">
-            <h1 slot="header">{{art.art_name|truncatechars:6|title}}</h1>
-            <p slot="content">{{art.art_name|truncatechars:20|lower}}</p>
-        </card>
+        <a href="{% url 'artGallery:art-detail' art.id %}">
+            <card data-image="{{MEDIA_URL}}{{art.photo1}}">
+                <h1 slot="header">{{art.art_name|truncatechars:6|title}}</h1>
+                <p slot="content">{{art.art_name|truncatechars:20|lower}}</p>
+            </card>
+        </a>
 {% endfor %}
 </div>
 </div>
