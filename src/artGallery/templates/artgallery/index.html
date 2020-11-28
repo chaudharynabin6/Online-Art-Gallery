@@ -1,50 +1,34 @@
-{% extends 'base.html' %}
+
 {% load static %}
+{% load humanize %}
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'artGallery/css/main.css' %}">  
+    <title>Home</title>
 
-
-
-{% block title %}
-artGallery
-{% endblock title %}
-
-{% block content %}
-
- <div class="ui container three column grid">
+</head>
+<body>
+ <h1 class="title">Hover over the cards</h1>
+<div id="app" class="container">
 {% for art,artist in arts %}
-
-<div class="column">
-        {% include "artgallery/card.html" %}
-       
-</div>
-
-        
-        
+        <card data-image="{{MEDIA_URL}}{{art.photo1}}">
+            <h1 slot="header">{{art.art_name|truncatechars:6|title}}</h1>
+            <p slot="content">{{art.art_name|truncatechars:20|lower}}</p>
+        </card>
 {% endfor %}
 </div>
-
-{% comment %} </div> {% endcomment %}
-
+</div>
 
 
 
 
-{% endblock content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
+<script src="{% static 'artGallery/js/main.js' %}"></script>  
 
-{% block scripts %}
-<script>
-$(document).ready(function(){
-    $(".rating").rating("disable");
-    
-    $("#grid").css({
-        "margin-left":"0px",
-        "margin-right":"0px",
-        "margin-top":"5px",
-        "margin-bottom":"5px"
-        });
-    $(".ui.label:last-child ").css({"margin-right":"-1rem"});
-});
-</script>
-
-{% endblock scripts %}
+</body>
+</html>
