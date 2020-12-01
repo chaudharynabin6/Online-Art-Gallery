@@ -13,9 +13,10 @@
     <!--Custom css ADD HERE-->
     {% block custom-css %} {% endblock custom-css %}
     <link rel="stylesheet" type="text/css" href={% static 'style.css' %}>
+    <link rel="stylesheet" type="text/css" href={% static 'new-navbar.css' %}>
     <style>
-    #my-nav + div {
-      margin-top:5rem;
+    #navbar + div {
+    padding-top:70px;
     }
     {% block css %}{% endblock css %}
     </style>
@@ -32,7 +33,8 @@
     </title>
   </head>
   <body>
-  {% include "main/mynavbar.html" %}
+  {% comment %} {% include "main/mynavbar.html" %} {% endcomment %}
+  {% include "main/new-navbar.html" %}
   {% block content %} {% endblock content %}
       
 

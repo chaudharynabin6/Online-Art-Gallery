@@ -1,0 +1,288 @@
+/* global */
+#navbar {
+  /* header */
+  /* media */
+  /*animations */
+}
+#navbar *,
+#navbar *::after,
+#navbar *::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+#navbar .mainHeader {
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-weight: bold;
+  padding: 0 0rem;
+  z-index: 1;
+  transition: 0.6s ease;
+}
+#navbar .mainHeader a {
+  text-decoration: none;
+  color: inherit;
+  text-transform: uppercase;
+}
+#navbar .mainHeader .navLinks {
+  display: flex;
+  list-style: none;
+}
+#navbar .mainHeader .navLinks .navLink {
+  transition: opacity 0.4s ease-in-out,
+    transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#navbar .mainHeader .navLinks .navLink:nth-of-type(2) {
+  transition-delay: 0.1s;
+}
+#navbar .mainHeader .navLinks .navLink:nth-of-type(3) {
+  transition-delay: 0.2s;
+}
+#navbar .mainHeader .navLinks .navLink:nth-of-type(4) {
+  transition-delay: 0.3s;
+}
+#navbar .mainHeader .navLinks .navLink a {
+  margin: 0.2rem;
+  padding: 1rem 0.5rem;
+}
+#navbar .mainHeader .navLinks .navLink a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+#navbar .mainHeader .menuIcon {
+  display: none;
+  position: relative;
+  padding: 26px 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+#navbar .mainHeader .menuIconLine {
+  display: block;
+  position: relative;
+  background-color: #fff;
+  height: 2px;
+  width: 20px;
+  border-radius: 4px;
+  transition: background 0.8 ease;
+}
+#navbar .mainHeader .menuIconLine::before,
+#navbar .mainHeader .menuIconLine::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+  background: #fff;
+  transition: background 0.8 ease;
+}
+#navbar .mainHeader .menuIconLine::before {
+  transform: translateY(-5px);
+}
+#navbar .mainHeader .menuIconLine::after {
+  transform: translateY(5px);
+}
+#navbar .mainHeader .menuBtn {
+  position: absolute;
+  top: -100px;
+}
+#navbar
+  .mainHeader
+  .menuBtn:focus
+  ~ .menuIcon
+  .menuIconLine::before {
+  transform: translateY(-7px);
+}
+#navbar
+  .mainHeader
+  .menuBtn:focus
+  ~ .menuIcon
+  .menuIconLine::after {
+  transform: translateY(7px);
+}
+#navbar .mainHeader.scrolled {
+  height: 60px;
+  background-color: black;
+  color: #fff;
+}
+#navbar .mainHeader.scrolled .a {
+  color: #fff;
+}
+#navbar .mainHeader.scrolled .menuIconLine,
+#navbar .mainHeader.scrolled .menuIconLine::before,
+#navbar .mainHeader.scrolled .menuIconLine::after {
+  background-color: white;
+}
+@media screen and (max-width: 767px) {
+  #navbar .mainHeader .menuIcon {
+    display: block;
+  }
+  #navbar .mainHeader .menuIconLine {
+    animation: closeMid 0.8s backwards reverse;
+  }
+  #navbar .mainHeader .menuIconLine::before {
+    animation: closeTop 0.8s backwards reverse;
+  }
+  #navbar .mainHeader .menuIconLine::after {
+    animation: closeBtm 0.8s backwards reverse;
+  }
+  #navbar .mainHeader .navLinks {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    justify-content: space-evenly;
+    align-items: center;
+    opacity: 0;
+    flex-direction: column;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #272727;
+    transition: opacity 0.8s 0.5s, clip-path 1s 0.5s;
+    clip-path: circle(50px at 78% 3%);
+  }
+  #navbar .mainHeader .navLinks .navLink {
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  #navbar .mainHeader .navLinks .navLink a {
+    display: block;
+    padding: 2rem 0;
+  }
+  #navbar .mainHeader .menuBtn:checked ~ .navLinks {
+    opacity: 1;
+    clip-path: circle(100% at center);
+  }
+  #navbar
+    .mainHeader
+    .menuBtn:checked
+    ~ .navLinks
+    .navLink {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.4s ease,
+      transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  #navbar
+    .mainHeader
+    .menuBtn:checked
+    ~ .navLinks
+    .navLink:nth-of-type(1) {
+    transition-delay: 0.7s;
+  }
+  #navbar
+    .mainHeader
+    .menuBtn:checked
+    ~ .navLinks
+    .navLink:nth-of-type(2) {
+    transition-delay: 0.8s;
+  }
+  #navbar
+    .mainHeader
+    .menuBtn:checked
+    ~ .navLinks
+    .navLink:nth-of-type(3) {
+    transition-delay: 0.9s;
+  }
+  #navbar
+    .mainHeader
+    .menuBtn:checked
+    ~ .navLinks
+    .navLink:nth-of-type(4) {
+    transition-delay: 1s;
+  }
+  #navbar
+    .mainHeader
+    .menuBtn:checked
+    ~ .menuIcon
+    .menuIconLine {
+    background-color: white;
+    animation: openMid 0.8s forwards;
+  }
+  #navbar
+    .mainHeader
+    .menuBtn:checked
+    ~ .menuIcon
+    .menuIconLine::before {
+    background-color: white;
+    animation: openTop 0.8s forwards;
+  }
+  #navbar
+    .mainHeader
+    .menuBtn:checked
+    ~ .menuIcon
+    .menuIconLine::after {
+    background-color: white;
+    animation: openBtm 0.8s forwards;
+  }
+}
+@keyframes openTop {
+  0% {
+    transform: translateY(-5px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(90deg);
+  }
+}
+@keyframes openMid {
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
+}
+@keyframes openBtm {
+  0% {
+    transform: translateY(5px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(90deg);
+  }
+}
+@keyframes closeTop {
+  0% {
+    transform: translateY(-5px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(90deg);
+  }
+}
+@keyframes closeMid {
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
+}
+@keyframes closeBtm {
+  0% {
+    transform: translateY(5px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(90deg);
+  }
+}
