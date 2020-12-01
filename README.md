@@ -22,9 +22,10 @@ This project is dedicated to minor project of Sagarmatha Engineering College.
 > 1. Choose project folder
 > 2. In terminal run: `pip3 install pipenv`
 > 3. Enter the folder with virtual environment: `cd name`
-> 4. Activate virtual environment : `python -m pipenv shell`
-> 5. Go to the source folder : `cd src`
->6. Do the migration : `python manage.py migrate`
-> 7. Create super user : `python manage.py createsuperuser`
-> 8. Test the server: `python manage.py runserver`
-> 9. go to this url in the browser: http://127.0.0.1:8000/
+> 4. Install all the dependencies: `python -m pipenv install`
+> 5. Activate virtual environment : `python -m pipenv shell`
+> 6. Go to the source folder : `cd src`
+>7. Do the migration : `python manage.py migrate`
+> 8. Create super user : `python manage.py createsuperuser`
+> 9. Test the server: `python manage.py runserver`
+> 10. go to this url in the browser: http://127.0.0.1:8000/
