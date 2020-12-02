@@ -71,7 +71,7 @@
   </div>
   <div class="bid-amount">Rs: {{art.minimum_price|intcomma}}</div>
 </div>
-{% if is_client %}
+{% if is_client and can_bid %}
 <form class="bid" action="{% url 'exhibition:auction' %}" method="POST">
   {% csrf_token %}
   <input type="hidden" name="art_id" value={{art.id}}>

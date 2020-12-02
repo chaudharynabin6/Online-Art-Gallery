@@ -21,6 +21,9 @@
 </div>
 <br>
 <div class="ui container">
+<div id="exhibition-day-container">
+  Auction Day: {{exhibition.exhibition_day|naturalday}}
+</div>
 <div id="app" class="container">
 {% for art in arts %}
         <a href="{% url 'exhibition:art-showcase' art.id %}">

@@ -7,10 +7,24 @@ from .models import exhibition, art, auction as auc
 from django.contrib.auth.models import User
 from django.db.models import Max
 from decimal import Context, Decimal
+from datetime import date, datetime
 # Create your views here.
 
 
+def can_bid():
+    """
+    this function help to make the bidding only on particular day
+    """
+    ex = exhibition.objects.filter(is_active=True).first()
+    if(ex):
+        ex_day = datetime.strptime(str(ex.exhibition_day), '%Y-%m-%d').date()
+        return date.today() == ex_day
+    else:
+        return False
+
+
 def exhibition_hall(request):
+    can_bid()
     """
     This function is home for the exhibition hall
     """
@@ -44,7 +58,8 @@ def exhibition_hall(request):
     context = {
         "arts": arts,
         "is_artist": is_artist,
-        "is_exhibition": is_exhibition
+        "is_exhibition": is_exhibition,
+        "exhibition": ex
     }
     return render(request, "exhibition/exhibition-hall.html", context)
 
@@ -86,7 +101,8 @@ def art_showcase(request, art_id):
     context = {
         "art": current_art,
         "is_client": is_client,
-        "top_5_auctions": top_5_auctions
+        "top_5_auctions": top_5_auctions,
+        "can_bid": can_bid()
     }
     return render(request, "exhibition/art-showcase-modified.html", context)
 
@@ -106,6 +122,10 @@ def approve_art(request):
 
 
 def auction(request):
+    if(not can_bid()):
+        return render(request, "exhibition/not-found.html", {
+            "error": "You can bid only in exhibition day"
+        })
     if not request.user.is_authenticated:
         return render(request, "exhibition/not-found.html", {
             "error": "you must login first"
