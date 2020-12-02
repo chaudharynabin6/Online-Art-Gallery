@@ -1,0 +1,495 @@
+#art-showcase {
+  background: linear-gradient(to right, #ec2f4b, #009fff);
+  font-size: 62.5%;
+}
+#art-showcase .artist-detail {
+  display: grid;
+  grid-template-columns: 6rem auto;
+  padding-bottom: 3rem;
+}
+#art-showcase .artist-photo-container {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+#art-showcase .artist-photo-container .artist-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+#art-showcase .art-detail {
+  display: flex;
+  flex-direction: column;
+  margin: 0px auto;
+}
+#art-showcase .art-detail .artist-name .art-by {
+  font-size: 1rem;
+  font-weight: 1000;
+  color: white;
+}
+#art-showcase .art-detail .name {
+  font-size: 2rem;
+  color: pink;
+}
+#art-showcase .image-container {
+  margin: 0px auto;
+  height: 50rem;
+  width: 50rem;
+  border-radius: 5rem;
+  overflow: hidden;
+  background: linear-gradient(
+    -45deg,
+    rgba(0, 0, 0, 0.22),
+    rgba(255, 255, 255, 0.25)
+  );
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
+}
+#art-showcase .image-container .art-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+#art-showcase .art-name {
+  display: block;
+  margin: 0px auto;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.6rem;
+  color: white;
+  font-weight: 1000;
+}
+#art-showcase .art-name:hover span {
+  border-bottom: solid 2px green;
+}
+#art-showcase .horizontal-divider .editorial {
+  display: block;
+  width: 100%;
+  height: 5rem;
+  max-height: 60px;
+  margin: 0;
+  z-index: 5;
+  bottom: 0;
+  /*   position:absolute;
+    left:0px;
+    float:left; */
+}
+#art-showcase .horizontal-divider .parallax1 > use {
+  animation: move-forever1 10s linear infinite;
+}
+#art-showcase
+  .horizontal-divider
+  .parallax1
+  > use:nth-child(1) {
+  animation-delay: -2s;
+}
+#art-showcase .horizontal-divider .parallax2 > use {
+  animation: move-forever2 8s linear infinite;
+}
+#art-showcase
+  .horizontal-divider
+  .parallax2
+  > use:nth-child(1) {
+  animation-delay: -2s;
+}
+#art-showcase .horizontal-divider .parallax3 > use {
+  animation: move-forever3 6s linear infinite;
+}
+#art-showcase
+  .horizontal-divider
+  .parallax3
+  > use:nth-child(1) {
+  animation-delay: -2s;
+}
+#art-showcase .horizontal-divider .parallax4 > use {
+  animation: move-forever4 4s linear infinite;
+}
+#art-showcase
+  .horizontal-divider
+  .parallax4
+  > use:nth-child(1) {
+  animation-delay: -2s;
+}
+@keyframes move-forever1 {
+  0% {
+    transform: translate(85px, 0%);
+  }
+  100% {
+    transform: translate(-90px, 0%);
+  }
+}
+@keyframes move-forever2 {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+  100% {
+    transform: translate(85px, 0%);
+  }
+}
+@keyframes move-forever3 {
+  0% {
+    transform: translate(85px, 0%);
+  }
+  100% {
+    transform: translate(-90px, 0%);
+  }
+}
+@keyframes move-forever4 {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+  100% {
+    transform: translate(85px, 0%);
+  }
+}
+#art-showcase .more-detail {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+#art-showcase .more-detail .art-video {
+  width: 90%;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+#art-showcase .more-detail .art-description {
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  padding: 1rem;
+  border-radius: 2rem;
+  overflow: hidden;
+  font-size: 1.6rem;
+  color: white;
+}
+#art-showcase .minimum-bid {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  padding: 2rem;
+  margin: auto;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  border-radius: 2rem;
+}
+#art-showcase .minimum-bid .bid-message {
+  font-size: 1rem;
+  margin: auto auto;
+}
+#art-showcase .minimum-bid .bid-amount {
+  font-size: 2rem;
+  margin: auto auto;
+}
+#art-showcase .bid {
+  display: grid;
+  grid-template-columns: auto min-content;
+  /* STYLE FORM INPUT */
+  /* FORM LABEL STYLE- */
+  /* LABEL ACTIVE STATE */
+  /* INPUT DEFAULT COLOR */
+  /* FROM BAR STYLE*/
+  /* active state */
+  /*HIGHLIGHT STYLE*/
+  /* HIGHLIGHT ACTIVE STYLE */
+  /* HIGHLIGHTER ANIMATION*/
+}
+#art-showcase .bid .bid-button a {
+  text-decoration: none;
+}
+#art-showcase .bid .bid-button .svg-wrapper {
+  position: relative;
+  width: 320px;
+}
+#art-showcase .bid .bid-button .svg-wrapper .text {
+  font-family: "Roboto Condensed";
+  font-size: 22px;
+  line-height: 32px;
+  letter-spacing: 8px;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+#art-showcase .bid .bid-button .svg-wrapper a {
+  z-index: 1;
+}
+#art-showcase .bid .bid-button .shape {
+  stroke-dasharray: 140 540;
+  stroke-dashoffset: -474;
+  stroke-width: 8px;
+  fill: transparent;
+  stroke: #19f6e8;
+  border-bottom: 5px solid black;
+  transition: stroke-width 1s, stroke-dashoffset 1s,
+    stroke-dasharray 1s;
+}
+#art-showcase .bid .bid-button .svg-wrapper:hover .shape {
+  stroke-width: 2px;
+  stroke-dashoffset: 0;
+  stroke-dasharray: 760;
+}
+#art-showcase .bid .container {
+  width: 350px;
+  margin: 0 auto;
+}
+#art-showcase .bid h1 {
+  font-size: 1.2em;
+  padding: 10px;
+  text-align: center;
+  color: #fff;
+}
+#art-showcase .bid .form-group {
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+#art-showcase .bid .input-group {
+  position: relative;
+}
+#art-showcase .bid .form-control {
+  display: block;
+  height: 36px;
+  width: 100%;
+  border: none;
+  border-radius: 0 !important;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+#art-showcase .bid .input-group .form-control {
+  position: relative;
+  z-index: inherit;
+  float: inherit;
+  width: 100%;
+  margin-bottom: 0;
+}
+#art-showcase .bid .form-control:focus {
+  border-color: #7c7c7c;
+  outline: none;
+  box-shadow: none;
+}
+#art-showcase .bid label {
+  position: absolute;
+  top: -18px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 300;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+#art-showcase .bid .form-horizontal .control-label {
+  position: relative;
+  top: 0;
+  margin-bottom: 0;
+}
+#art-showcase .bid .float-label {
+  left: 0;
+  top: 7px;
+  font-size: 16px;
+  pointer-events: none;
+}
+#art-showcase .bid .form-control:focus ~ .float-label,
+#art-showcase .bid .form-control:valid ~ .float-label {
+  top: -18px;
+  font-size: 12px;
+}
+#art-showcase .bid .form-control:focus ~ label {
+  color: #e5536b;
+}
+#art-showcase .bid label ~ .form-bar:before,
+#art-showcase .bid label ~ .form-bar:after {
+  background: #e5536b;
+}
+#art-showcase .bid .form-bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+#art-showcase .bid .form-bar:before,
+#art-showcase .bid .form-bar:after {
+  content: "";
+  height: 1px;
+  width: 0;
+  bottom: 0;
+  position: absolute;
+  transition: 0.3s ease all;
+  -moz-transition: 0.3s ease all;
+  -webkit-transition: 0.3s ease all;
+}
+#art-showcase .bid .form-bar:before {
+  left: 50%;
+}
+#art-showcase .bid .form-bar:after {
+  right: 50%;
+}
+#art-showcase .bid .form-control:focus ~ .form-bar:before,
+#art-showcase .bid .form-control:focus ~ .form-bar:after {
+  width: 50%;
+}
+#art-showcase .bid .form-highlight {
+  position: absolute;
+  height: 60%;
+  width: 60px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+#art-showcase .bid .form-control:focus ~ .form-highlight {
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+}
+@-webkit-keyframes inputHighlighter {
+  from {
+    background: #e5536b;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+@-moz-keyframes inputHighlighter {
+  from {
+    background: #e5536b;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+@keyframes inputHighlighter {
+  from {
+    background: #e5536b;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+#art-showcase .top-five-bids {
+  text-transform: uppercase;
+  font-size: 5rem;
+  color: white;
+  text-align: center;
+  letter-spacing: 0.2rem;
+  font-weight: 100;
+  transition: all 1s ease-in;
+}
+#art-showcase .top-five-bids:hover {
+  text-decoration: underline;
+}
+#art-showcase .client-auction-detail {
+  display: grid;
+  grid-auto-rows: 8rem;
+  row-gap: 1rem;
+  align-content: center;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  padding: 1rem;
+  border-radius: 2rem;
+  overflow: hidden;
+  font-size: 1.6rem;
+  color: white;
+}
+#art-showcase .client-auction-detail .client-detail {
+  padding-left: 2rem;
+  align-content: center;
+
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 0, 0.1) inset;
+  display: grid;
+  grid-template-columns: 6rem 20ch auto;
+  grid-template-rows: 6rem;
+}
+#art-showcase
+  .client-auction-detail
+  .client-detail
+  .client-photo {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+#art-showcase
+  .client-auction-detail
+  .client-detail
+  .client-photo
+  img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+#art-showcase
+  .client-auction-detail
+  .client-detail
+  .client-name {
+  margin: auto auto;
+}
+#art-showcase
+  .client-auction-detail
+  .client-detail
+  .auction-amount {
+  color: pink;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: auto auto;
+}
+@media only screen and (max-width: 1000px) {
+  #art-showcase .more-detail {
+    grid-template-columns: 100%;
+  }
+  #art-showcase .more-detail .art-video {
+    margin: 2rem auto;
+  }
+  #art-showcase .more-detail .art-description {
+    margin: 2rem auto;
+    width: 90%;
+  }
+}

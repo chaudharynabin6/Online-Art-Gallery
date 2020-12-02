@@ -1,0 +1,132 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'exhibition/artShowcaseModified/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'new-navbar.css' %}">
+    <title>Art showcase</title>
+    
+</head>
+<body>
+    {% include "main/new-navbar.html" %}
+    <div id="art-showcase" style="padding-top:70px;">
+    
+    <div class="artist-detail">
+  <a class="artist-photo-container" href="{% url 'client:view-artist-profile' art.artist.user %}">
+    <img class="artist-image" src="{{MEDIA_URL}}{{art.artist.profile_photo}}" art="artis-image">
+  </a>
+  <div class="art-detail">
+    <h2 class="artist-name"><span class="art-by">Art By </span><span class="name">{{art.artist.user|title}}</span></h2>
+  </div>
+</div>
+<div class="image-container">
+  <img class="art-image" src="{{MEDIA_URL}}{{art.photo}}" alt="art image">
+</div>
+<p class="art-name"><span>{{art.name|title}}</span>
+</p>
+
+<section class="horizontal-divider">
+  <svg class="editorial" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+    <defs>
+      <path id="gentle-wave" d="M-160 44c30 0 
+    58-18 88-18s
+    58 18 88 18 
+    58-18 88-18 
+    58 18 88 18
+    v44h-352z" />
+    </defs>
+    <g class="parallax1">
+      <use xlink:href="#gentle-wave" x="50" y="3" fill="#f461c1" />
+    </g>
+    <g class="parallax2">
+      <use xlink:href="#gentle-wave" x="50" y="0" fill="#4579e2" />
+    </g>
+    <g class="parallax3">
+      <use xlink:href="#gentle-wave" x="50" y="9" fill="#3461c1" />
+    </g>
+    <g class="parallax4">
+      <use xlink:href="#gentle-wave" x="50" y="6" fill="#ffffff00" />
+    </g>
+  </svg>
+</section>
+<div class="more-detail">
+  <video class="art-video" controls autoplay>
+
+    <source src="{{MEDIA_URL}}{{art.video}}" type="video/webm">
+
+    <source src="{{MEDIA_URL}}{{art.video}}" type="video/mp4">
+
+    Sorry, your browser doesn't support embedded videos.
+  </video>
+  <div class="art-description">
+  {{art.description}}
+  </div>
+</div>
+<div class="minimum-bid">
+  <div class="bid-message">
+    Minimum Bid
+  </div>
+  <div class="bid-amount">Rs: {{art.minimum_price|intcomma}}</div>
+</div>
+{% if is_client %}
+<form class="bid" action="{% url 'exhibition:auction' %}" method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="art_id" value={{art.id}}>
+  <div class="form-group">
+    <input type="number" name="bid_amount" step="0.01" class="form-control" id="name" required data-validation-required-message="Please enter your bid amount.">
+    <span class="form-highlight"></span>
+    <span class="form-bar"></span>
+    <label class="float-label" for="name">Bid Amount</label>
+    <p class="help-block text-danger"></p>
+  </div>
+  <div class="bid-button">
+    <div class="svg-wrapper">
+      <div>
+        <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+          <rect class="shape" height="60" width="320" />
+        </svg>
+      </div>
+      <button type="submit" class="text" style="cursor:pointer;border:none;outline:none;background:transparent;">SUBMIT</button>
+    </div>
+  </div>
+</form>
+{% endif %}
+{% if top_5_auctions %}
+<div class="top-five-bids">top five bids </div>
+<div class="client-auction-detail">
+{% for auction in top_5_auctions %}
+  <div class="client-detail">
+    <div class="client-photo">
+      <img src="{{MEDIA_URL}}{{auction.client.profile_photo}}" alt="client image">
+    </div>
+    <div class="client-name">{{auction.client.user}}</div>
+    <div class="auction-amount">
+      RS. {{auction.bid_amount|intword}}
+    </div>
+  </div>
+{% endfor %}
+{% endif %}
+{% if request.user.is_superuser %}
+<form  class="bid" action="{% url 'exhibition:approve-art' %}" method="POST">
+{% csrf_token %}
+            <input type="hidden" name="art_id" value={{art.id}}>
+<div style="margin:5rem auto;" class="bid-button">
+    <div class="svg-wrapper">
+      <div>
+        <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+          <rect class="shape" height="60" width="320" />
+        </svg>
+      </div>
+      <button type="submit" class="text" style="cursor:pointer;border:none;outline:none;background:transparent;">Approve</button>
+    </div>
+  </div>
+</form>
+{% endif %}
+</div>
+</div>
+<script src="{% static 'main.js' %}"></script>
+</body>
+</html>

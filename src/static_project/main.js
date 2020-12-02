@@ -1,6 +1,3 @@
-$(document).ready(function () {
-  console.log("base is working");
-});
 //-------------------------------------------
 // nav bar js
 (function () {

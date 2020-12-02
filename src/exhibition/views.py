@@ -88,7 +88,7 @@ def art_showcase(request, art_id):
         "is_client": is_client,
         "top_5_auctions": top_5_auctions
     }
-    return render(request, "exhibition/art-showcase.html", context)
+    return render(request, "exhibition/art-showcase-modified.html", context)
 
 
 def approve_art(request):
