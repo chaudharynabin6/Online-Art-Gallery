@@ -1,0 +1,47 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'cart/artGallery/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'new-navbar.css' %}">
+    <title>My cart</title>
+</head>
+<body>
+{% include "main/new-navbar.html" %}
+<div id="cart-container">
+{% if has_art %}
+<div style="padding-top:60px;"class="cart-info">
+    Arts in cart
+  </div>
+  {% for art,artist in arts %}
+  <div class="cart">
+    <div class="art-image-container">
+      <img class="art-image" src="{{MEDIA_URL}}{{art.photo1}}" alt="cart art">
+    </div>
+    <div class="art-name">{{art.art_name|title}}</div>
+    <div class="art-price">Rs: {{art.price|intcomma}}</div>
+  </div>
+  {% endfor %}
+
+  <div class="total">
+    <div class="total-price-text">
+      Total Amount:
+    </div>
+    <div class="total-price-amount">
+      RS: {{total_price}}
+    </div>
+  </div>
+</div>
+{% else %}
+<div style="padding-top:60px;" class="cart-info">
+    No items in cart
+  </div>
+
+{% endif %}
+  
+  <script src="{% static 'main.js' %}"></script>  
+</body>
+</html>
