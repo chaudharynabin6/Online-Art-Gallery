@@ -8,12 +8,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'artGallery/css/main.css' %}">  
+    <link rel="stylesheet" href="{% static 'artGallery/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'new-navbar.css' %}">  
+    <link rel="stylesheet" href="{% static 'style.css' %}">  
+
+
     <title>Home</title>
 
 </head>
 <body>
-<div id="app" class="container">
+{% include "main/new-navbar.html" %}
+<div style="paddin-top:80px;" id="app" class="container">
 {% for art,artist in arts %}
         <a href="{% url 'artGallery:art-detail' art.id %}">
             <card data-image="{{MEDIA_URL}}{{art.photo1}}">
@@ -29,7 +34,9 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
-<script src="{% static 'artGallery/js/main.js' %}"></script>  
+<script src="{% static 'artGallery/js/main.js' %}"></script>
+<script src="{% static 'main.js' %}"></script>  
+
 
 </body>
 </html>

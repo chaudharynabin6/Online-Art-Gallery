@@ -6,11 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'client/artistProfile/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'new-navbar.css' %}">  
+    <link rel="stylesheet" href="{% static 'style.css' %}">  
     <title>My profile</title>
 </head>
 <body>
-   
-<section class="profile">
+{% include "main/new-navbar.html" %}
+<section style="padding-top:80px;" class="profile">
   <header class="header">
     <div class="details">
       <img src="{{MEDIA_URL}}{{artist.profile_photo}}" alt="John Doe" class="profile-pic">
@@ -65,7 +67,9 @@
 </section> 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
-<script src="{% static 'client/artistProfile/js/main.js' %}"></script>  
+<script src="{% static 'client/artistProfile/js/main.js' %}"></script>
+<script src="{% static 'main.js' %}"></script>  
+
 
 </body>
 </html>

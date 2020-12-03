@@ -6,11 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'client/clientProfile/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'new-navbar.css' %}">  
+    <link rel="stylesheet" href="{% static 'style.css' %}">  
     <title>My profile</title>
 </head>
 <body>
-   
-<section class="profile">
+{% include "main/new-navbar.html" %}
+<section style="padding-top:80px;" class="profile">
   <header class="header">
     <div class="details">
       <img src="{{MEDIA_URL}}{{client.profile_photo}}" alt="John Doe" class="profile-pic">
@@ -44,6 +46,7 @@
     </div>
   </header>
 </section> 
+<script src="{% static 'main.js' %}"></script>  
 </body>
 </html>
 
