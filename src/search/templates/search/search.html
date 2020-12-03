@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% block custom-css %}
+<link rel="stylesheet" href="{% static 'artGallery/css/main.css' %}">
+{% endblock custom-css %}
 {% block css %}
 #search{
     display:block;
@@ -56,17 +59,16 @@
 <button id ="search-button" type="submit">Search</button>
 </form>
 </div>
-<div class="ui container">
-<div class="ui four column grid">
+<div style="paddin-top:80px;" id="app" class="container">
 {% for art,artist in arts %}
-
-<div class="column">
-{% include "search/card.html" %}
-</div>
-{% empty%}
-<div class="column">
-<h1 class="ui header green">No arts found</h1>
-</div>
+        <a href="{% url 'artGallery:art-detail' art.id %}">
+            
+        </a><card data-image="{{MEDIA_URL}}{{art.photo1}}">
+                <h1 slot="header">{{art.art_name|truncatechars:6|title}}</h1>
+                <p slot="content">{{art.art_name|truncatechars:20|lower}}</p>
+            </card>
+{% empty %}
+<h1 class="ui container green header">NO ARTS</h1>
 {% endfor %}
 </div>
 </div>
@@ -75,6 +77,9 @@
 
 
 {% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
+<script src="{% static 'artGallery/js/main.js' %}"></script>
+<script src="{% static 'main.js' %}"></script>  
 <script>
 $(document).ready(function(){
     $(".rating").rating("disable");
