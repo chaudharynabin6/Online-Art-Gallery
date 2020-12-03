@@ -63,6 +63,23 @@ def dashboard(request):
             return render(request, "client/artist-dashboard.html", context)
 
 
+def profile(request):
+    """
+    view profile of user or artist
+    """
+    user = request.user
+    if(not(user.is_authenticated) or request.user.is_superuser):
+        return render(request, "client/not-found.html", context={
+            "error": "you must login as client or artist first"
+        })
+    else:
+        current_artist = artist.objects.filter(user=request.user).first()
+        if(current_artist):
+            return artist_profile(request)
+        else:
+            return client_profile(request)
+
+
 def artist_profile(request):
     user = request.user
     if(not(user.is_authenticated) or request.user.is_superuser):
