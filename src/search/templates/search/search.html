@@ -63,10 +63,11 @@
 {% for art,artist in arts %}
         <a href="{% url 'artGallery:art-detail' art.id %}">
             
-        </a><card data-image="{{MEDIA_URL}}{{art.photo1}}">
+        <card data-image="{{MEDIA_URL}}{{art.photo1}}">
                 <h1 slot="header">{{art.art_name|truncatechars:6|title}}</h1>
                 <p slot="content">{{art.art_name|truncatechars:20|lower}}</p>
             </card>
+        </a>
 {% empty %}
 <h1 class="ui container green header">NO ARTS</h1>
 {% endfor %}
