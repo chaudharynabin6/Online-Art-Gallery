@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'client/artistProfile/css/main.css' %}">
     <link rel="stylesheet" href="{% static 'new-navbar.css' %}">  
-    <link rel="stylesheet" href="{% static 'style.css' %}">  
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+    <link rel="stylesheet" href="{% static 'custom-buttons.css' %}">  
+
     <title>My profile</title>
 </head>
 <body>
@@ -50,6 +52,20 @@
 </section>
 <section>
 <h1 class="title" style="color:pink;">Recent Arts</h1>
+<section>
+<div id="button">
+<section class="buttons">
+  <div class="container">
+      <a href="{% url 'client:add-art' %}" class="btn btn-1">
+      <svg>
+        <rect x="0" y="0" fill="none" width="100%" height="100%"/>
+      </svg>
+     ADD MORE ARTS
+    </a>
+    </div>
+</section>
+</div>
+</section>
 <div id="app" class="container">
 {% for art,artist in recent_arts %}
         <a href="{% url 'artGallery:art-detail' art.id %}">
