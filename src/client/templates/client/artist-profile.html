@@ -15,7 +15,9 @@
 <section style="padding-top:80px;" class="profile">
   <header class="header">
     <div class="details">
+       <a class="ui button primary" href="{% url 'client:client-update' %}">
       <img src="{{MEDIA_URL}}{{artist.profile_photo}}" alt="John Doe" class="profile-pic">
+      </a>
       <h1 class="heading">{{request.user|truncatechars:20|title}}</h1>
       <div class="location">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
