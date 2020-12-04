@@ -16,17 +16,17 @@
 <div id="cart-container">
 {% if has_art %}
 <div style="padding-top:60px;"class="cart-info">
-    Arts You win in Exhibition
+    Arts in cart
   </div>
-  {% for auction in my_auctions %}
+  {% for art,artist in arts %}
   <div class="cart">
     <div class="art-image-container">
-      <a href="{% url 'exhibition:art-showcase' auction.art.id %}">
-      <img class="art-image" src="{{MEDIA_URL}}{{auction.art.photo}}" alt="cart art">
+      <a href="{% url 'artGallery:art-detail' art.id %}">
+        <img class="art-image" src="{{MEDIA_URL}}{{art.photo1}}" alt="cart art">
       </a>
     </div>
-    <div class="art-name">{{auction.art.name|title}}</div>
-    <div class="art-price">Rs: {{auction.bid_amount|intcomma}}</div>
+    <div class="art-name">{{art.art_name|title}}</div>
+    <div class="art-price">Rs: {{art.price|intcomma}}</div>
   </div>
   {% endfor %}
 
@@ -35,7 +35,7 @@
       Total Amount:
     </div>
     <div class="total-price-amount">
-      RS: {{total_amount}}
+      RS: {{total_price}}
     </div>
   </div>
 </div>

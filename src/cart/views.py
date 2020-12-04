@@ -10,6 +10,22 @@ from decimal import Decimal
 # Create your views here.
 
 
+def choose_cart(request):
+    user = request.user
+    if(not(user.is_authenticated) or request.user.is_superuser):
+        return render(request, "client/not-found.html", context={
+            "error": "you must login as client or artist first"
+        })
+    else:
+        current_client = client.objects.filter(user=request.user).first()
+        if(current_client):
+            return render(request, "cart/cart.html")
+        else:
+            return render(request, "client/not-found.html", {
+                "error": "you must be client"
+            })
+
+
 def view_art_gallery_cart(request):
     user = request.user
     if(not(user.is_authenticated) or request.user.is_superuser):
@@ -37,7 +53,7 @@ def view_art_gallery_cart(request):
                 "total_price": total_price,
                 "has_art": has_art,
             }
-            return render(request, "cart/cart.html", context)
+            return render(request, "cart/cart-art-gallery.html", context)
         else:
             return render(request, "client/not-found.html", {
                 "error": "you must be client"
