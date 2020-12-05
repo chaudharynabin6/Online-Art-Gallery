@@ -218,7 +218,7 @@ def add_art(request):
                 new_art = form.save()
                 current_artist.art_list.add(new_art)
                 is_new_art_added = True
-                return redirect("client:dashboard")
+                return redirect("client:artist-profile")
             else:
                 print("invalid form")
         context = {
