@@ -157,7 +157,7 @@ def update_client_or_artist(request):
                     valid_client = form.save(commit=False)
                     valid_client.save()
                     is_client_updated = True
-                    return redirect("client:dashboard")
+                    return redirect("client:client-profile")
                 else:
                     return HttpResponse("client not updated")
             context = {
@@ -190,7 +190,7 @@ def update_client_or_artist(request):
                     print(form.cleaned_data)
 
                     is_artist_updated = True
-                    return redirect("client:dashboard")
+                    return redirect("client:artist-profile")
                 else:
                     return HttpResponse("artist not updated")
             context = {
