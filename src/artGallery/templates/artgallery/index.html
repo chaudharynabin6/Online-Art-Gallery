@@ -23,7 +23,7 @@
         <a href="{% url 'artGallery:art-detail' art.id %}">
             <card data-image="{{MEDIA_URL}}{{art.photo1}}">
                 <h1 slot="header">{{art.art_name|truncatechars:6|title}}</h1>
-                <p slot="content">{{art.art_name|truncatechars:20|lower}}</p>
+                <p slot="content">{{art.description|truncatechars:20|lower}}</p>
             </card>
         </a>
 {% endfor %}
