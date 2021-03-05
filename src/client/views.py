@@ -110,6 +110,7 @@ def client_profile(request):
     else:
         current_client = client.objects.filter(user=request.user).first()
         if(current_client):
+            cart_arts = []
             if(current_client.mycart):
                 # arts = list(current_client.mycart.art_list.all())
                 cart_arts = [(art, art.artist_set.all().first())
